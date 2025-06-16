@@ -1,0 +1,213 @@
+/*css file*/
+
+* { 
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+}
+main {
+  width: 1440px;
+  height: 3047px;
+  margin: 0 auto; 
+}
+
+body {
+    background-color: #f5f3ef;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h1{
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 48px;
+}
+
+h2{
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 32px;
+}
+
+p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+/***********************************STYLE DES BOUTONS*****************************************/
+
+.bouton {
+    display: inline-block;
+    padding: 22px 38px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    background-color: #00AC66;
+    border: none;
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-bottom: 65px;
+    transition: background-color 0.5s ease-out;
+}
+
+.bouton:hover {
+    background-color: #006D41;    
+}
+
+.bouton-bg {
+    display: inline-block;
+    padding: 22px 38px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: #00AC66;
+    border: 1px solid #00AC66;
+    border-radius: 10px;
+    margin-top: 40px;
+    transition: background-color 0.5s ease-out;
+}
+
+.bouton-bg:hover {
+    background-color: #006D41; 
+    color: white;
+}
+
+
+/************************************* HEADER ************************************************/
+header {
+    width: 1440px;
+    height: 80px;
+    margin: auto;
+}
+
+header a {
+    color: black;
+}
+
+.headerConteneur {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    margin: 0 150px;
+}
+
+/* LOGO */
+.Logo {
+    margin-right: 80px;
+}
+
+.Logo img {
+    width: 155px;
+    height: 51px;
+}
+
+/*******************************************************NAV****************************************************/
+
+/* CONTENEUR NAVIGATION */
+.nav-sections {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* NAVIGATION PRINCIPALE */
+.main-nav ul,
+.user-nav ul {
+    display: flex;
+    gap: 30px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main-nav a,
+.user-nav a {
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.main-nav a.active,
+.user-nav a.active,
+.main-nav a:hover,
+.user-nav a:hover {
+    color: #9D8B65; 
+}
+
+/* Icônes Font Awesome */
+.user-nav i {
+    margin-right: 5px;
+}
+
+
+
+
+/************************************************************Footer*************************************************/
+
+.footer {
+    height: 60px;
+}
+
+.footer ul {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    list-style-type: none;
+    justify-content: end;
+    height: 100%;
+    padding-right: 46px;
+}
+
+.footer ul li {
+    padding-left: 40px;
+    cursor: pointer;
+}
+
+/******************************************************* Section Découverte *****************************/
+.illustration-decouverte {
+    max-width: 405px;
+}
+
+.illustration-decouverte p {
+    text-align: end;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 12px;
+    color: #A6A6A6;
+}
+
+#section-decouverte {
+    max-width: 1200px;
+    margin: 80px auto;
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    padding: 40px;
+}
+
+.img-decouverte {
+    width: 405px !important;
+    height: 540px !important;
+    object-fit: cover!important; 
+}
+
+.conteneur-decouverte {
+    width: 25%;
+    margin-right: 110px;
+}
+
+/**********************************************Section 

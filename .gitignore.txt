@@ -1,0 +1,5 @@
+# Fichier de configuration de la base de données
+config/config.php
+
+# Cache éventuel
+cache/

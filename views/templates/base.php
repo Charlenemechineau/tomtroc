@@ -26,7 +26,7 @@
                         <a href="index.php?action=home"><li>Nos livres à l'échange</li></a>
                     </ul>
                 </nav>
-                <nav class="user-nav">
+                <nav class="utilisateur-nav">
                 <ul>
                         <li><a href="#"><i class="fa-regular fa-message"></i> Messagerie</a></li>
                         <li><a href="#"><i class="fa-regular fa-user"></i> Mon compte</a></li>
@@ -53,7 +53,6 @@
                 <li>Mentions légales</li>
                 <li>Tom Troc©</li>
                 <li><img src=" ./images/footer-logo.png" alt="logo du footer"></li>
-
             </ul>
         </div>
     </footer>

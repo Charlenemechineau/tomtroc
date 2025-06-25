@@ -1,5 +1,6 @@
 <?php
-
+// Classe représentant un livre, avec ses propriétés et méthodes d'accès.
+// Hérite d'AbstractEntity.
  class Book extends AbstractEntity
  {
     private string $title;
@@ -7,17 +8,9 @@
     private string $description;
     private string $image;
     private string $disponibilite;
-    private int $id_vendeur;
+    private int $user_id;
 
-    public function __construct(array $data)
-    {
-    $this->title = $data['title'];
-    $this->author = $data['author'];
-    $this->description = $data['description'];
-    $this->image = $data['image'];
-    $this->disponibilite = $data['disponibilite'];
-    $this->id_vendeur = $data['id_vendeur'];
-    }
+    
 
     public function getTitle(): string
     {
@@ -69,13 +62,13 @@
         $this->disponibilite = $disponibilite;
     }
 
-    public function getIdVendeur(): int
+    public function getUser_Id(): int
     {
-        return $this->id_vendeur;
+        return $this->user_id;
     }
 
-    public function setIdVendeur(int $id_vendeur): void
+    public function setUser_Id(int $user_id): void
     {
-        $this->id_vendeur = $id_vendeur;
+        $this->id_vendeur = $user_id;
     }
 }

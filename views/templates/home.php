@@ -20,21 +20,20 @@
     <div class="cartes-livres">
         <?php
         /** @var Book[] $books */
-        $compteur = 0;
         foreach ($books as $book):
-            if ($compteur >= 4) break;
         ?>
-            <article class="carte-livre">
-                <img src="images/<?= htmlspecialchars($book->getImage()) ?>" alt="Couverture de <?= htmlspecialchars($book->getTitle()) ?>">
-                <h3><?= htmlspecialchars($book->getTitle()) ?></h3>
-                <p class="auteur"><?= htmlspecialchars($book->getAuthor()) ?></p>
-            </article>
+            <a>
+                <article class="carte-livre">
+                    <img src="images/<?= htmlspecialchars($book->getImage()) ?>" alt="Couverture de <?= htmlspecialchars($book->getTitle()) ?>">
+                    <h3><?= htmlspecialchars($book->getTitle()) ?></h3>
+                    <p class="auteur"><?= htmlspecialchars($book->getAuthor()) ?></p>
+                </article>
+            </a>
         <?php
-            $compteur++;
         endforeach;
         ?>
     </div>
-    <a href="" class="bouton">Voir tous les livres</a>
+    <a href="index.php?action=books" class="bouton">Voir tous les livres</a>
 </section>
 
 <!--Section infos -->
@@ -47,7 +46,7 @@
         <div class="point">Parcourez les livres disponibles chez d'autres membres.</div>
         <div class="point">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
     </div>
-    <a href="" class="bouton-clair">Voir tous les livres</a>
+    <a href="index.php?action=books" class="bouton-clair">Voir tous les livres</a>
 </section>
 
 <!-- Sestion Valeurs -->

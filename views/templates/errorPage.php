@@ -1,3 +1,4 @@
+
 <div class="error">
     <h2>Erreur</h2>
     <p><?= $errorMessage ?? "Oups ! La page que vous cherchez n'existe pas." ?></p>

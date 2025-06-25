@@ -12,6 +12,11 @@ try {
             $bookController->showHome();
             break;
 
+        case 'books':
+            $bookController= new BookController();
+            $bookController->showAllBooks();
+            break;
+
         default:
             throw new Exception("L'action demandée n'est pas prise en charge.");
     }

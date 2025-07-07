@@ -37,4 +37,34 @@ class BookController
             'books' => $books
         ]);
     }
+
+    //Function qui va me permettre de récupérer 
+    public function showBookDetails()
+    {
+        // Récupère l'id du livre depuis l'URL (ex: index.php?action=bookDetails&id=3)
+        $bookId = $_GET['id'] ?? null;
+
+        if (!$bookId) {
+            throw new Exception("L'identifiant du livre est manquant.");
+        }
+
+        // Récupère le livre correspondant via BookManager
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookById((int)$bookId);
+
+        if (!$book) {
+            throw new Exception("Livre introuvable.");
+        }
+
+        // Récupère l'utilisateur propriétaire via UserManager
+        $userManager = new UserManager();
+        $user = $userManager->getUserById($book->getUserId());
+
+        // Prépare et affiche la vue en passant les données du livre et du propriétaire
+        $view = new View("Détail du livre");
+        $view->render("detailbook", [
+            "book" => $book,
+            "user" => $user
+        ]);
+    }
 }

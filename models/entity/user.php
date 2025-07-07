@@ -8,6 +8,7 @@ class User extends AbstractEntity
     private string $email;
     private string $password;
     private string $created_at;
+    private string $picture_user;
 
     // Getters et Setters
     public function getPseudo(): string
@@ -49,4 +50,15 @@ class User extends AbstractEntity
     {
         $this->created_at = $created_at;
     }
+
+    public function getPictureUser() : string 
+    {
+        return $this->picture_user;
+    }
+
+    public function setPictureUser(string $picture_user): void 
+    {
+        $this->picture_user = $picture_user;
+    }
 }
+

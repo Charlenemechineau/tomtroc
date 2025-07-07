@@ -21,15 +21,17 @@
         </form>
     </div>
 
-     <!-- Vérification s'il y a des livres dans la variable $books -->
+    <!-- Vérification s'il y a des livres dans la variable $books -->
     <?php if (!empty($books)): ?>
         <div class="livres">
             <?php foreach ($books as $book): ?>
-                <a>
+                <a href="index.php?action=detailBook&id=<?= htmlspecialchars($book->getId()) ?>">
                     <article class="carte-livre carte-livre-bibliotheque">
                         <img src="images/<?= htmlspecialchars($book->getImage()) ?>" alt="Couverture de <?= htmlspecialchars($book->getTitle()) ?>">
                         <h3><?= htmlspecialchars($book->getTitle()) ?></h3>
                         <p class="auteur"><?= htmlspecialchars($book->getAuthor()) ?></p>
+                        <p class="vendeur">Vendu par <?= htmlspecialchars($book->getPseudo()) ?></p>                       
+                        
                         <?php if ($book->getDisponibilite() !== 'disponible'): ?>
                             <span class="banniere-non-dispo">Non disponible</span>
                         <?php endif; ?>

@@ -3,10 +3,10 @@
 
 abstract class AbstractEntityManager
 {
-    protected $db;
+    protected PDO $db;
 
     public function __construct()
     {
-        $this->db = DBManager::getInstance();
+       $this->db = DBManager::getInstance()->getPDO();
     }
 }

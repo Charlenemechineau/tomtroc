@@ -12,7 +12,10 @@ class BookManager extends AbstractEntityManager
     public function getAllBooks() : array
     {
         // Requête SQL pour sélectionner toutes les colonnes de tous les livres.
-        $sql = "SELECT * FROM book";
+        $sql = "SELECT book.*, users.pseudo, users.picture_user 
+                FROM book 
+                LEFT JOIN users ON book.user_id = users.id";
+
 
         // Exécution de la requête.
         $result = $this->db->query($sql);
@@ -56,4 +59,38 @@ class BookManager extends AbstractEntityManager
         // Retourne le tableau des derniers livres.
         return $books;
     }
+
+
+/**
+ * Récupère un livre spécifique dans la base de données grâce à son ID.
+ * 
+ * @param int $id L'identifiant unique du livre à récupérer.
+ * @return Book|null Retourne un objet Book si trouvé, sinon null.
+ */
+
+    // Prépare la requête SQL avec un paramètre nommé :id pour sélectionner un livre par son identifiant
+    public function getBookById(int $id): ?Book
+{
+    $sql = "SELECT * FROM book WHERE id = :id";
+
+    // Préparer la requête (pour gérer le paramètre :id)
+    $stmt = $this->db->prepare($sql);
+
+    // Lier la valeur $id au paramètre :id
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+    // Exécuter la requête
+    $stmt->execute();
+
+    // Récupérer une seule ligne de résultat
+    $data = $stmt->fetch();
+
+
+    if ($data) {
+        return new Book($data); 
+    }
+
+    return null;
+}
+
 }

@@ -22,7 +22,7 @@
         /** @var Book[] $books */
         foreach ($books as $book):
         ?>
-            <a>
+            <a href="index.php?action=detailBook&id=<?= htmlspecialchars($book->getId()) ?>">
                 <article class="carte-livre">
                     <img src="images/<?= htmlspecialchars($book->getImage()) ?>" alt="Couverture de <?= htmlspecialchars($book->getTitle()) ?>">
                     <h3><?= htmlspecialchars($book->getTitle()) ?></h3>

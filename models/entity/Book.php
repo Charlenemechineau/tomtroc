@@ -9,6 +9,8 @@
     private string $image;
     private string $disponibilite;
     private int $user_id;
+    private string $pseudo;
+    private string $pictureUser;
 
     
 
@@ -22,7 +24,7 @@
         $this->title = $title;
     }
 
-     public function getAuthor(): string
+    public function getAuthor(): string
     {
         return $this->author;
     }
@@ -62,13 +64,29 @@
         $this->disponibilite = $disponibilite;
     }
 
-    public function getUser_Id(): int
+    public function getUserId(): int
     {
         return $this->user_id;
     }
 
-    public function setUser_Id(int $user_id): void
+    public function setUserId(int $user_id): void
     {
-        $this->id_vendeur = $user_id;
+        $this->user_id = $user_id;
+    }
+
+    public function getPseudo(): string {
+    return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): void {
+        $this->pseudo = $pseudo;
+    }
+
+    public function getPictureUser(): string {
+        return $this->pictureUser;
+    }
+
+    public function setPictureUser(string $pictureUser): void {
+        $this->pictureUser = $pictureUser;
     }
 }

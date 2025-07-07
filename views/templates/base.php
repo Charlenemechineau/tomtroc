@@ -23,8 +23,7 @@
                 <nav class="main-nav">
                     <ul class="main-menu">
                         <a href="index.php?action=home"><li>Accueil</li></a>
-                        <a href="index.php?action=home"><li>Nos livres à l'échange</li></a>
-                    </ul>
+                        <a href="index.php?action=books"><li>Nos livres à l'échange</li></a>
                 </nav>
                 <nav class="utilisateur-nav">
                 <ul>

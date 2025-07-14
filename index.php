@@ -22,6 +22,16 @@ try {
         $bookController->showBookDetails();
         break;
         
+        case 'rechercheLivres':
+        $bookController = new BookController();
+        $bookController->rechercherLivres();
+        break;
+        
+        case 'loginUser':
+        $userController = new UserController();
+        $userController->showLoginForm(); 
+        break;
+
         default:
             throw new Exception("L'action demandée n'est pas prise en charge.");
     }

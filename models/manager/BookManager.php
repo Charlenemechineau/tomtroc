@@ -93,4 +93,41 @@ class BookManager extends AbstractEntityManager
     return null;
 }
 
+
+
+
+/**
+ * Recherche des livres dont le titre contient la chaîne fournie.
+ * 
+ * @param string $title La chaîne de recherche dans le titre du livre.
+ * @return Book[] Un tableau d’objets Book correspondant à la recherche.
+ */
+public function findBooksByTitle(string $title): array
+{
+    // On ajoute les % pour permettre la recherche partielle dans le titre (LIKE '%titre%')
+    $searchTerm = "%" . $title . "%";
+
+    // Requête SQL qui sélectionne tous les livres dont le titre correspond au critère
+    $sql = "SELECT * FROM book WHERE title LIKE :title";
+
+    // Préparation de la requête pour éviter les injections SQL
+    $stmt = $this->db->prepare($sql);
+
+    // On lie la valeur $searchTerm au paramètre :title de la requête et on lui indique que c'est une chaine de caractères//
+    $stmt->bindValue(':title', $searchTerm, PDO::PARAM_STR);
+
+    // Exécution de la requête
+    $stmt->execute();
+
+    // Tableau pour stocker les livres trouvés
+    $books = [];
+
+    // Parcours de chaque résultat retourné par la base de données
+    while ($data = $stmt->fetch()) {
+        // Création d’un objet Book avec les données récupérées
+        $books[] = new Book($data);
+    }
+    // On retourne la liste des livres correspondant à la recherche
+    return $books;
+}
 }

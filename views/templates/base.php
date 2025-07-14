@@ -26,17 +26,17 @@
                         <a href="index.php?action=books"><li>Nos livres à l'échange</li></a>
                 </nav>
                 <nav class="utilisateur-nav">
-                <ul>
-                        <li><a href="#"><i class="fa-regular fa-message"></i> Messagerie</a></li>
-                        <li><a href="#"><i class="fa-regular fa-user"></i> Mon compte</a></li>
-                        <li><a href="#">Déconnexion</a></li>
-
-                        <!-- Si l'utilisateur n'est pas connecté,
-                        <li><a href="#">Connexion</a></li>
-                        <li><a href="#">Inscription</a></li>
-                        -->
+                    <ul>
+                        <li><a href="#"><i class="fa-regular fa-message"></i> Messagerie</a></li> 
+                        <li><a href="#"><i class="fa-regular fa-user"></i> Mon compte</a></li>   
+                        
+                        <?php if (!isset($_SESSION['user'])): ?>
+                            <li><a href="index.php?action=loginUser">Connexion</a></li>
+                        <?php else: ?>
+                            <li><a href="index.php?action=logoutUser">Déconnexion</a></li>
+                        <?php endif; ?>
                     </ul>
-                </nav>    
+                </nav>
             </div>
         </div>    
     </header>

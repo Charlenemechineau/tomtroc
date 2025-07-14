@@ -1,4 +1,4 @@
-<--template Connexion
+<!--template Connexion -->
 <section id="connexion-section">
     <div class="connexion-formulaire">
 
@@ -15,10 +15,10 @@
             <label for="password">Mot de passe</label>
             <input type="password" name="password" id="password" required>
 
-            <button type="submit" class="submit">Se connecter</button>
+            <button type="submit" class="bouton">Se connecter</button>
         </form>
 
-        <p>Pas encore de compte ? <a href="index.php?action=register">Créer un compte</a></p>
+        <p>Pas de compte ? <a href="#">Créer un compte</a></p>
 
     </div>
 

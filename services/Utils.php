@@ -28,7 +28,7 @@ class Utils {
         return "onclick=\"return confirm('$message');\"";
     }
 
-     // Cette fonction sert à afficher du texte proprement sur la page
+    // Cette fonction sert à afficher du texte proprement sur la page
     // Elle enlève les caractères dangereux et met chaque ligne dans un paragraphe <p>
     public static function format(string $string) : string
     {

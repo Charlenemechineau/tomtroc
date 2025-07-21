@@ -49,7 +49,7 @@
     <a href="index.php?action=books" class="bouton-clair">Voir tous les livres</a>
 </section>
 
-<!-- Sestion Valeurs -->
+<!-- Section Valeurs -->
 <section class="valeurs">
     <div class="banniere">
         <img src="./images/banner.png" alt="photo d'une femme dans une bibliothéque">

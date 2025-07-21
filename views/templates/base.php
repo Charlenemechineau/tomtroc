@@ -22,8 +22,8 @@
             <div class="nav-sections">    
                 <nav class="main-nav">
                     <ul class="main-menu">
-                        <a href="index.php?action=home"><li>Accueil</li></a>
-                        <a href="index.php?action=books"><li>Nos livres à l'échange</li></a>
+                        <a href="index.php?action=home"><li>Accueil</li></a> <!--Lien vers la page d'acceuil-->
+                        <a href="index.php?action=books"><li>Nos livres à l'échange</li></a> <!-- lien vers la page nos livre à l'échange-->
                 </nav>
                 <nav class="utilisateur-nav">
                     <ul>
@@ -31,9 +31,9 @@
                         <li><a href="#"><i class="fa-regular fa-user"></i> Mon compte</a></li>   
                         
                         <?php if (!isset($_SESSION['user'])): ?>
-                            <li><a href="index.php?action=loginUser">Connexion</a></li>
+                            <li><a href="index.php?action=loginUser">Connexion</a></li> <!-- lien pour la connexion au compte Utilisateur-->
                         <?php else: ?>
-                            <li><a href="index.php?action=logoutUser">Déconnexion</a></li>
+                            <li><a href="index.php?action=logout">Déconnexion</a></li> <!--Lien pour la déconnexion du compte -->
                         <?php endif; ?>
                     </ul>
                 </nav>

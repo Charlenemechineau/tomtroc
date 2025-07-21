@@ -78,7 +78,7 @@ section {
 }
 
 .bouton:hover {
-    background-color: #006D41;    
+    background-color: var( --vert-foncé);    
 }
 
 .bouton-clair {
@@ -87,15 +87,15 @@ section {
     text-align: center;
     font-weight: 600;
     font-size: 16px;
-    color: #00AC66;
-    border: 1px solid #00AC66;
+    color: var( --vert-principal);
+    border: 1px solid var( --vert-principal);
     border-radius: 10px;
     margin-top: 40px;
     transition: background-color 0.5s ease-out;
 }
 
 .bouton-clair:hover {
-    background-color: #006D41; 
+    background-color: var( --vert-foncé); 
     color: white;
 }
 
@@ -174,7 +174,7 @@ header a {
 
 .footer li {
     font-size: 12px;
-    color: #292929;
+    color: var(--noir-texte);
 }
 .footer ul li {
     padding-left: 40px;
@@ -191,7 +191,7 @@ header a {
     font-weight: 400;
     font-style: italic;
     font-size: 12px;
-    color: #A6A6A6;
+    color: var(--gris-texte);
 }
 
 #section-decouverte {
@@ -217,7 +217,7 @@ header a {
 /**********************************************Section cards livres*****************************************/
 
 #section-livres {
-    background-color: #FAF9F7;
+    background-color: var( --fond-secondaire);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -262,7 +262,7 @@ header a {
 .carte-livre .auteur {
     font-weight: 400;
     font-size: 14px;
-    color: #A6A6A6;
+    color: var ( --gris-texte);
     margin: 0 15px 10px;
 }
 
@@ -276,7 +276,7 @@ header a {
 .section-infos h2 {
     font-size: 32px;
     margin-bottom: 20px;
-    color: #292929;
+    color: var( --noir-texte);
 }
 
 .section-infos .intro {
@@ -284,7 +284,7 @@ header a {
     height: 38px;
     font-size: 16px;
     margin-bottom: 40px;
-    color: #292929;
+    color: var( --noir-texte);
     margin-left: auto;
     margin-right: auto;
 }
@@ -312,7 +312,7 @@ header a {
     padding: 20px;
     border-radius: 10px;
     font-size: 14px;
-    color: #292929;
+    color: var( --noir-texte);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -334,14 +334,14 @@ header a {
 }
 
 .a-propos p{
-    color: #292929;
+    color: var( --noir-texte);
 }
 
 .equipe {
     font-weight: 400;
     font-style: italic;
     font-size: 12px;
-    color: #A6A6A6;
+    color: var( --gris-texte);
 }
 
 .coeur {
@@ -381,7 +381,7 @@ header a {
     padding-left: 40px;
     border: 1px solid #F0F0F0;
     border-radius: 6px;
-    color: #A6A6A6;
+    color: var( --gris-texte);
     font-size: 14px;
     outline: none;
 }
@@ -421,11 +421,11 @@ header a {
 .contenu-echange i {
     position: relative;
     left: 35px;
-    color: #A6A6A6;
+    color: var( --gris-texte);
 }
 
 .vendeur {
-    color: #A6A6A6;
+    color: var( --gris-texte);
     font-weight: 400;
     font-size: 13px;
     margin: 30px 15px 10px;
@@ -444,7 +444,7 @@ header a {
 
 .fil-ariane {
     font-size: 10px;
-    color: #A6A6A6;
+    color: var( --gris-texte);
     font-weight: 300;
     margin-left: 150px;
 }
@@ -471,13 +471,13 @@ header a {
 }
 
 .auteur {
-    color: #A6A6A6;
+    color: var( --gris-texte);
     font-weight: 400;
     margin: 0;
 }
 
 .separateur {
-    color: #A6A6A6;
+    color: var( --gris-texte);
     margin: 32px 0 0 0;
 }
 
@@ -520,14 +520,14 @@ header a {
     font-weight: 600;
     font-size: 16px;
     color: white;
-    background-color: #00AC66;
+    background-color: var( --vert-principal);
     border: none;
     border-radius: 10px;
     transition: background-color 0.5s ease-out;
 }
 
 .infos-livre .bouton:hover {
-    background-color: #006D41;
+    background-color: var( --vert-foncé);
 }
 
 /****************************************** Mire de connexion*****************************************************/
@@ -552,7 +552,7 @@ header a {
 .connexion-formulaire form {
     display: flex;
     flex-direction: column;
-    color: #A6A6A6;
+    color: var( --gris-texte);
     font-size: 14px;
 }
 
@@ -576,6 +576,72 @@ header a {
 }
 
 .img-connexion {
+    width: 50%;
+    min-width: 50%;
+    object-fit: cover;
+}
+
+/************************Mire inscritpion*************************************************/
+/* -------- PAGE INSCRIPTION -------- */
+#inscription-section {
+    margin-bottom: 0;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+.formulaire-connexion.inscription {
+    width: 50%;
+    padding: 0 150px;
+    display: flex;
+    flex-direction: column;
+    color: var(--gris-texte);
+    font-size: 14px;
+}
+
+#titre-inscription {
+    margin-top: 130px;
+    margin-bottom: 55px;
+    color: var(--noir-texte);
+}
+
+.formulaire-connexion.inscription form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulaire-connexion.inscription label {
+    margin-bottom: 10px;
+    color: var(--noir-texte);
+}
+
+.formulaire-connexion.inscription input {
+    height: 50px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 0 20px;
+}
+
+.formulaire-connexion.inscription .bouton {
+    margin-top: 0;
+    margin-bottom: 40px;
+    background-color: var(--vert-principal);
+    color: var(--fond-principal);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background-color 0.5s ease-out;
+}
+
+.formulaire-connexion.inscription .bouton:hover {
+    background-color: var(--vert-foncé);
+}
+
+#inscription-section img {
     width: 50%;
     min-width: 50%;
     object-fit: cover;

@@ -16,10 +16,11 @@
             <h1><?= htmlspecialchars($book->getTitle()) ?></h1>
             <p class="auteur">par <?= htmlspecialchars($book->getAuthor()) ?></p>
             <p class="separateur">______</p>
-
+            <!-- Description du livre-->
             <h4>Description</h4>
             <p class="description"><?= nl2br(htmlspecialchars($book->getDescription())) ?></p>
 
+            <!--Propriétaire du livre-->
             <h4>Propriétaire</h4>
             <div class="proprietaire">
                 <img src="images/pictures/<?= htmlspecialchars($user->getPictureUser()) ?>" alt="Photo de profil de <?= htmlspecialchars($user->getPseudo()) ?>" class="photo-profil">

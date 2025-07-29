@@ -97,26 +97,86 @@ class UserManager extends AbstractEntityManager
     }
 
     /**
-     * Crée un nouvel utilisateur (pour l'inscription).
-     *
-     * @param string $pseudo Le pseudonyme de l'utilisateur.
-     * @param string $email L'adresse email de l'utilisateur.
-     * @param string $password Le mot de passe en clair.
-     * @return bool True si création réussie, false sinon.
-     */
+ * Crée un nouvel utilisateur (pour l'inscription).
+ *
+ * @param string $pseudo Le nom d'utilisateur choisi.
+ * @param string $email L'adresse email de l'utilisateur.
+ * @param string $password Le mot de passe en clair (non sécurisé).
+ * @return bool Renvoie true si l'utilisateur est bien créé, sinon false.
+ */
     public function createUser(string $pseudo, string $email, string $password): bool
+        {
+            // On transforme le mot de passe en une chaîne sécurisée grâce à la fonction hash (ici SHA512)
+            $hashedPassword = hash("sha512", $password);
+            
+            // On prépare une requête pour ajouter un nouvel utilisateur dans la base de données
+            $sql = "INSERT INTO users (pseudo, email, password, created_at) 
+                    VALUES (:pseudo, :email, :password, NOW())";
+            
+            // On prépare cette requête pour l'exécuter en toute sécurité (éviter les attaques)
+            $stmt = $this->db->prepare($sql);
+            
+            // On remplace les mots-clés de la requête par les vraies valeurs que l'on a reçues
+            $stmt->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+            $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+            $stmt->bindValue(':password', $hashedPassword, PDO::PARAM_STR);
+            
+            // On exécute la requête, et on retourne le résultat (true si ça marche, false sinon)
+            return $stmt->execute();
+        }
+
+
+
+    /**
+     * Mise à jour des données utilisateur.
+     *
+     * @param int $id L'identifiant de l'utilisateur à modifier.
+     * @param string $pseudo Le nouveau nom d'utilisateur.
+     * @param string $email La nouvelle adresse email.
+     * @param string|null $password Le nouveau mot de passe (optionnel).
+     * @return bool Renvoie true si la mise à jour a réussi, sinon false.
+     */
+    public function updateUser($id, $pseudo, $email, $password = null)
     {
-        // Hachage du mot de passe avec SHA512 //
-        $hashedPassword = hash("sha512", $password);
-        
-        $sql = "INSERT INTO users (pseudo, email, password, created_at) 
-                VALUES (:pseudo, :email, :password, NOW())";
-        
+        // On prépare la requête pour changer le pseudo et l'email
+        $sql = "UPDATE users SET pseudo = :pseudo, email = :email";
+
+        // Si on veut aussi changer le mot de passe (qu'il y en a un)
+        if (!empty($password)) {
+            // On ajoute la modification du mot de passe dans la requête
+            $sql .= ", password = :password";
+        }
+
+        // On précise quel utilisateur on veut modifier grâce à son ID
+        $sql .= " WHERE id = :id";
+
+        // On prépare la requête pour l'exécuter
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
-        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-        $stmt->bindValue(':password', $hashedPassword, PDO::PARAM_STR);
         
+        // On remplace les mots-clés dans la requête par les vraies valeurs
+        $stmt->bindValue(':pseudo', $pseudo);
+        $stmt->bindValue(':email', $email);
+
+        // Si on change le mot de passe, on le sécurise avant de le mettre dans la requête
+        if (!empty($password)) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $stmt->bindValue(':password', $hashedPassword);
+        }
+
+        // On ajoute l'id de l'utilisateur qu'on veut modifier
+        $stmt->bindValue(':id', $id);
+
+        // On exécute la requête et on renvoie si ça a fonctionné ou pas
+        return $stmt->execute();
+    }
+
+
+/*********Changement de la photo de profil utilisateur */
+    public function updateProfilePicture(int $userId, string $picture_user): bool
+    {
+        $stmt = $this->db->prepare("UPDATE users SET profile_picture = :profile_picture WHERE id = :id");
+        $stmt->bindParam(':profile_picture', $picture_user);
+        $stmt->bindParam(':id', $userId);
         return $stmt->execute();
     }
 }

@@ -28,7 +28,7 @@
                 <nav class="utilisateur-nav">
                     <ul>
                         <li><a href="#"><i class="fa-regular fa-message"></i> Messagerie</a></li> 
-                        <li><a href="#"><i class="fa-regular fa-user"></i> Mon compte</a></li>   
+                        <li><a href="index.php?action=myAccount"><i class="fa-regular fa-user"></i> Mon compte</a></li>   
                         
                         <?php if (!isset($_SESSION['user'])): ?>
                             <li><a href="index.php?action=loginUser">Connexion</a></li> <!-- lien pour la connexion au compte Utilisateur-->

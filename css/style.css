@@ -92,6 +92,7 @@ section {
     border-radius: 10px;
     margin-top: 40px;
     transition: background-color 0.5s ease-out;
+    background-color: #f5f3ef;
 }
 
 .bouton-clair:hover {
@@ -217,6 +218,7 @@ header a {
 /**********************************************Section cards livres*****************************************/
 
 #section-livres {
+    background: white;
     background-color: var( --fond-secondaire);
     display: flex;
     flex-direction: column;
@@ -262,7 +264,7 @@ header a {
 .carte-livre .auteur {
     font-weight: 400;
     font-size: 14px;
-    color: var ( --gris-texte);
+    color: var( --gris-texte);
     margin: 0 15px 10px;
 }
 
@@ -645,4 +647,293 @@ header a {
     width: 50%;
     min-width: 50%;
     object-fit: cover;
+}
+
+/*****************************Partie mon compte*************************************/
+
+.section-mon-compte {
+    display: flex;
+    flex-direction: column;
+    margin: 45px 155px 100px 150px;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FaF9f7;
+}
+
+.titre-page-compte {
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 2.5rem;
+    color: var(--noir-texte);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Conteneur principal : 2 colonnes */
+.conteneur-compte {
+    width: 1135px;
+    height: 508px;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+/* Colonne gauche profil */
+.bloc-gauche {
+    width: 547px;
+    height: 508px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-profil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.custom-file-upload {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--gris-texte);
+    cursor: pointer;
+    text-decoration: underline;
+    user-select: none;
+}
+
+.ligne-separation {
+    width: 220px;
+    top : 506px;
+    left: 307px;
+    border: 1px;
+    color: #f5f3ef;
+
+}
+
+.pseudo-profil {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+    color: var(--noir-texte);
+    margin-bottom: 5px;
+}
+
+.membre-depuis {
+    font-size: 14px;
+    color: var(--gris-texte);
+}
+
+.infos-bibliotheque{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bloc-gauche h4 {
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.bloc-gauche h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.nb-livres {
+    font-weight: 600;
+    color: #292929;
+    font-size: 8px;
+}
+
+.icon-biblio {
+    width: 11px;
+    height: 14px;
+    margin-right: 5px;
+}
+
+/* Colonne droite formulaire */
+.bloc-droit {
+    width: 547px;
+    height: 508px;
+    background: white;
+    border-radius: 20px;
+    padding: 40px 50px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.05);
+}
+
+.titre-infos {
+    font-family: "inter";
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--noir-texte);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+
+.bloc-droit button {
+    width: 150px;
+    height: 63px;
+    top: 661px;
+    left: 847px;
+    border-radius: 10px;
+    color: var( --vert-principal);
+    border: 1px solid var( --vert-principal);
+    background-color: #f5f3ef;
+    margin-top: 10px;
+    font: "inter";
+    font-weight: 600;
+    size: 16px;
+
+}
+/* Formulaire infos */
+.formulaire-infos {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.formulaire-infos label {
+    margin-bottom: 8px;
+    color: var(--gris-texte);
+}
+
+.formulaire-infos input {
+    background-color:#EDF2F6;
+    height: 50px;
+    border: 1px solid white;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+}
+
+/*Prise en compte forcé de la couleur des inputs car navigateur qui bloque la règle*/
+input:-webkit-autofill {
+    background-color: #edf2f6 !important;
+    box-shadow: 0 0 0px 1000px #edf2f6 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+/* Section livres */
+.section-voslivres {
+    background: white;
+    margin-top: 35px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    padding: 35px 50px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.section-voslivres .titre-infos {
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--fond-principal);
+    padding-bottom: 10px;
+}
+
+/* Tableau livres */
+.tableau-livres {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableau-livres th {
+    
+    color: var(--noir-texte);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 15px 10px;
+    text-align: left;
+}
+
+.tableau-livres td {
+    padding: 15px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    font-size: 12px;
+    color: var(--noir-texte);
+    max-width: 150px;
+}
+
+.livre-miniature {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Limiter description à 4 lignes avec ellipsis */
+.tableau-livres td:nth-child(4) p {
+    overflow: hidden;
+    font-style: italic;
+}
+
+/* Statuts disponibilité */
+.statut-disponible {
+    color: white;
+    font-size: 9px;
+    font-weight: 500;
+    padding: 3.7px 13.31px;
+    border: 1px solid #6DC5A1;
+    border-radius: 29.5px;
+    background-color: #6DC5A1;
+   }
+
+.statut-indisponible {
+    color: white;
+    font-size: 9px;
+    font-weight: 500;
+    padding: 3.7px 13.31px;
+    border: 1px solid #C56D6D;
+    border-radius: 29.5px;
+    background-color: #C56D6D
+}
+
+.bouton-editer {
+    color: black;
+    text-decoration: underline;
+    font-size: 12px;
+    margin-right: 20px;
+}
+
+.bouton-supprimer {
+    color: #CB2D2D;
+    text-decoration: underline;
+    font-size: 12px;
+}
+
+
+/* Texte si pas de livre */
+.aucun-livre {
+    text-align: center;
+    font-style: italic;
+    color: var(--gris-texte);
+    padding: 40px 0;
+}
+
+/* Input file caché */
+#profile_picture {
+    display: none;
+}
+
+.ligne-paire {
+    background-color: #EDF2F6; /* gris très clair */
+}
+
+.ligne-impaire {
+    background-color: #f5f3ef; /* blanc */
 }

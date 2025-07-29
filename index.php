@@ -3,6 +3,7 @@
 require_once 'config/config.php';
 require_once 'config/autoload.php';
 
+
 $action = Utils::request('action', 'home');
 
 try {
@@ -50,6 +51,16 @@ try {
         case 'logout':
         $userController = new UserController();
         $userController->logoutUser();
+        break;
+
+        case 'myAccount':
+        $userController = new UserController();
+        $userController->showMyAccount();
+        break;
+
+        case 'updateAccount':
+        $userController = new UserController();   
+        $userController->updateAccount();
         break;
 
         default:

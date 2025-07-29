@@ -130,4 +130,27 @@ public function findBooksByTitle(string $title): array
     // On retourne la liste des livres correspondant à la recherche
     return $books;
 }
+
+
+/**
+ * Récupère tous les livres d'un utilisateur spécifique
+ * 
+ * @param int $userId L'identifiant de l'utilisateur
+ * @return Book[] Un tableau d'objets Book appartenant à cet utilisateur
+ */
+public function getBooksByUserId(int $userId): array
+{
+    $sql = "SELECT * FROM book WHERE user_id = :user_id ORDER BY title ASC";
+    
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    $books = [];
+    while ($data = $stmt->fetch()) {
+        $books[] = new Book($data);
+    }
+    
+    return $books;
+}
 }

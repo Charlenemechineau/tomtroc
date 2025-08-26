@@ -24,8 +24,8 @@ class UserController
             // Connexion réussie : on stocke l'utilisateur en session
             $_SESSION['user'] = $user;
 
-            // Redirection vers l'accueil ou la page "Mon compte"
-            Utils::redirect("home");
+            // Redirection vers la page "Mon compte"
+            Utils::redirect("myAccount");
         } else {
             // Connexion échouée, on renvoie la vue avec un message
             $view = new View("Connexion");
@@ -155,25 +155,51 @@ class UserController
         }
     }
 
+        /**
+     * Gère la mise à jour de la photo de profil de l'utilisateur connecté.
+     * 
+     * Étapes :
+     * - Vérifie que le formulaire a bien été soumis par POST et qu’un fichier a été envoyé.
+     * - Récupère l’utilisateur en session et son ID.
+     * - Gère le nom du fichier de manière unique pour éviter les doublons.
+     * - Déplace le fichier dans le dossier de stockage des photos.
+     * - Met à jour la base de données avec le nouveau nom de fichier via le UserManager.
+     * - Met à jour l'objet utilisateur en session pour refléter la nouvelle image.
+     * - Redirige vers la page 'Mon compte' qu’il y ait une image ou non.
+     */
     public function updateProfilePicture(): void
     {
+        // Vérifie que le formulaire a été soumis en POST et qu’un fichier a bien été envoyé
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['profile_picture']['tmp_name'])) {
+
+            // Récupère l'utilisateur connecté depuis la session et son ID
             $user = $_SESSION['user'];
             $userId = $user->getId();
 
+            // Récupère le fichier envoyé par l'utilisateur
             $file = $_FILES['profile_picture'];
+
+            // Génère un nom de fichier unique pour éviter les conflits avec d’autres fichiers
             $fileName = uniqid() . "_" . basename($file['name']);
+
+            // Définition du dossier de destination pour stocker les photos de profil
             $targetDir = "./css/user_pic/";
             $targetFile = $targetDir . $fileName;
 
+            // Déplace le fichier téléchargé vers le dossier cible
             if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+                // Met à jour l'image de profil dans la base de données
                 $this->userManager->updateProfilePicture($userId, $fileName);
+
+                // Met à jour l'objet utilisateur en session avec la nouvelle image
                 $user->setPictureUser($fileName);
                 $_SESSION['user'] = $user;
             }
 
+            // Redirige l’utilisateur vers la page "Mon compte"
             Utils::redirect('myAccount');
         } else {
+            // Si aucune image n’a été envoyée, redirige aussi vers "Mon compte"
             Utils::redirect('myAccount');
         }
     }

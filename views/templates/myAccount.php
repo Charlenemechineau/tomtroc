@@ -19,12 +19,15 @@
             <p class="ligne-separation">_________________________________________</p>
 
             <h2 class="pseudo-profil"><?= htmlspecialchars($user->getPseudo()) ?></h2>
+
+            <!-- Affiche la date d'inscription formatée au format jour/mois/année -->
             <p class="membre-depuis">Membre depuis le <?= date('d/m/Y', strtotime($user->getCreatedAt())) ?></p>
 
             
                 <h4 class="titre-bibliotheque">Bibliothèque</h4>
                 <div class="infos-bibliotheque">
                     <img class="icon-biblio" src="images/vector-biblio.svg" alt="icone bibliothéque livre">
+
                     <p class="nb-livres"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
                 </div>
         </div>
@@ -43,7 +46,7 @@
                 <label for="pseudo">Pseudo</label>
                 <input type="text" id="pseudo" name="pseudo" value="<?= htmlspecialchars($user->getPseudo()) ?>" required>
 
-                <button class="bouton-enregistrement" type="submit">Enregistrer</button>
+                <button class="bouton-enregistrer" type="submit">Enregistrer</button>
             </form>
         </div>
     </div>
@@ -70,7 +73,6 @@
                     <?php $i = 0; ?>
                     <?php foreach ($books as $book): ?>
                         <tr class="<?= $i % 2 === 0 ? 'ligne-paire' : 'ligne-impaire' ?>">
-                        <tr>
                             <td>
                                 <img src="images/<?= htmlspecialchars($book->getImage()) ?>" 
                                     alt="<?= htmlspecialchars($book->getTitle()) ?>" 
@@ -78,7 +80,12 @@
                             </td>
                             <td><?= htmlspecialchars($book->getTitle()) ?></td>
                             <td><?= htmlspecialchars($book->getAuthor()) ?></td>
-                            <td><?= htmlspecialchars($book->getDescription()) ?></td>
+                            <td>
+                            <?php 
+                                $description = htmlspecialchars($book->getDescription());
+                                echo strlen($description) > 100 ? substr($description, 0, 100) . '...' : $description;
+                            ?>
+                            </td>
                             <td>
                                 <span class="statut-<?= strtolower($book->getDisponibilite()) ?>">
                                     <?= ucfirst(htmlspecialchars($book->getDisponibilite())) ?>
@@ -91,6 +98,7 @@
                                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">Supprimer</a>
                             </td>
                         </tr>
+                        <?php $i++; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </tbody>

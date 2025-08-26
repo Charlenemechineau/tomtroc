@@ -19,49 +19,61 @@ try {
             break;
 
         case 'detailBook':
-        $bookController = new BookController();
-        $bookController->showBookDetails();
-        break;
+            $bookController = new BookController();
+            $bookController->showBookDetails();
+            break;
         
         case 'rechercheLivres':
-        $bookController = new BookController();
-        $bookController->rechercherLivres();
-        break;
+            $bookController = new BookController();
+            $bookController->rechercherLivres();
+            break;
         
         case 'loginUser':
-        $userController = new UserController();
-        $userController->showLoginForm(); 
-        break;
+            $userController = new UserController();
+            $userController->showLoginForm(); 
+            break;
 
         case 'processLogin':
-        $userController = new UserController();
-        $userController->loginUser();
-        break;
+            $userController = new UserController();
+            $userController->loginUser();
+            break;
 
         case 'register':
-        $userController = new UserController();
-        $userController->showRegisterForm();
-        break;
+            $userController = new UserController();
+            $userController->showRegisterForm();
+            break;
 
         case 'processRegister':
-        $userController = new UserController();
-        $userController->registerUser();
-        break;
+            $userController = new UserController();
+            $userController->registerUser();
+            break;
 
         case 'logout':
-        $userController = new UserController();
-        $userController->logoutUser();
-        break;
+            $userController = new UserController();
+            $userController->logoutUser();
+            break;
 
         case 'myAccount':
-        $userController = new UserController();
-        $userController->showMyAccount();
-        break;
+            $userController = new UserController();
+            $userController->showMyAccount();
+            break;
 
         case 'updateAccount':
-        $userController = new UserController();   
-        $userController->updateAccount();
-        break;
+            $userController = new UserController();   
+            $userController->updateAccount();
+            break;
+
+        case 'messagerie':
+            $messageController = new MessageController();
+            $messageController->showMessages(); // méthode pour afficher la messagerie
+            break;
+
+        case 'sendMessage':
+            $messagerieController = new MessageController();
+            $messagerieController->sendMessage(); // méthode pour envoyer un message 
+            break;
+
+
 
         default:
             throw new Exception("L'action demandée n'est pas prise en charge.");

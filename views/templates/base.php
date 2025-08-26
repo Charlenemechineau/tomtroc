@@ -27,7 +27,7 @@
                 </nav>
                 <nav class="utilisateur-nav">
                     <ul>
-                        <li><a href="#"><i class="fa-regular fa-message"></i> Messagerie</a></li> 
+                        <li><a href="index.php?action=messagerie"><i class="fa-regular fa-message"></i> Messagerie</a></li> 
                         <li><a href="index.php?action=myAccount"><i class="fa-regular fa-user"></i> Mon compte</a></li>   
                         
                         <?php if (!isset($_SESSION['user'])): ?>

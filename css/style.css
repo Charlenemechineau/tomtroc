@@ -6,6 +6,8 @@
     --noir-texte: #292929;
     --fond-principal: #f5f3ef;
     --fond-secondaire: #faf9f7;
+    --fond-formulaire: #edf2f6;
+    --Fond-blanc: #ffffff;
 }
 main {
     width: 1440px;
@@ -160,6 +162,7 @@ header a {
 /************************************************************Footer*************************************************/
 
 .footer {
+    background-color: var(--Fond-blanc);
     height: 60px;
 }
 
@@ -171,6 +174,7 @@ header a {
     justify-content: end;
     height: 100%;
     padding-right: 46px;
+    margin-top: 0px !important;
 }
 
 .footer li {
@@ -504,7 +508,7 @@ header a {
     height: 60px;
     border-radius: 90%;
     object-fit: cover;
-    margin-right: 20px;
+    margin-right: 7px;
 }
 
 .proprietaire a {
@@ -780,7 +784,7 @@ header a {
 }
 
 
-.bloc-droit button {
+.bouton-enregistrer {
     width: 150px;
     height: 63px;
     top: 661px;
@@ -790,9 +794,8 @@ header a {
     border: 1px solid var( --vert-principal);
     background-color: #f5f3ef;
     margin-top: 10px;
-    font: "inter";
     font-weight: 600;
-    size: 16px;
+    font-size: 16px;
 
 }
 /* Formulaire infos */
@@ -804,23 +807,23 @@ header a {
 }
 
 .formulaire-infos label {
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     color: var(--gris-texte);
 }
 
 .formulaire-infos input {
-    background-color:#EDF2F6;
+    background-color:var(--fond-formulaire);
     height: 50px;
     border: 1px solid white;
     border-radius: 6px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-left: 15px;
 }
 
 /*Prise en compte forcé de la couleur des inputs car navigateur qui bloque la règle*/
-input:-webkit-autofill {
-    background-color: #edf2f6 !important;
-    box-shadow: 0 0 0px 1000px #edf2f6 inset !important;
+input:autofill {
+    background-color: var(--fond-formulaire) !important;
+    box-shadow: 0 0 0px 1000px var(--fond-formulaire) inset !important;
     transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -830,10 +833,6 @@ input:-webkit-autofill {
     background: white;
     margin-top: 35px;
     border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
     padding: 35px 50px;
     border-collapse: collapse;
     width: 100%;
@@ -891,7 +890,7 @@ input:-webkit-autofill {
     border: 1px solid #6DC5A1;
     border-radius: 29.5px;
     background-color: #6DC5A1;
-   }
+}
 
 .statut-indisponible {
     color: white;
@@ -931,9 +930,263 @@ input:-webkit-autofill {
 }
 
 .ligne-paire {
-    background-color: #EDF2F6; /* gris très clair */
+    background-color: var(--fond-formulaire) !important; /* gris très clair */
 }
 
 .ligne-impaire {
-    background-color: #f5f3ef; /* blanc */
+    background-color: #f5f3ef !important; /* blanc */
+}
+
+
+/*********************************Partie template messagerie*******************************************/
+
+#messagerie {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    margin-bottom: 0px !important;
+}
+
+.conteneur-messagerie {
+    display: flex;
+    width: 100%;
+    height: 893px;
+    max-width: 1200px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#titre-messagerie {
+    padding-top: 20px;
+    padding-left: 20px;
+    font-size: 26px;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+/* Colonne gauche - liste des conversations */
+.element-conversation {
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.2s;
+}
+
+.liste-conversations {
+    background-color: var(--fond-secondaire);
+    width: 308px;
+
+}
+
+.lien-conversation {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Photo profil (liste et messages : taille par défaut) */
+.photo-profil {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Bloc pseudo + dernier message en colonne */
+.infos-principales {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.pseudo-utilisateur {
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0 0 3px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dernier-message {
+    color: var(--gris-texte);
+    font-size: 12px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Heure (liste) à droite */
+.heure-dernier-message {
+    font-size: 12px;
+    color: var(--gris-texte);
+    margin-left: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-left: 10px;
+}
+
+/* Zone de chat à droite */
+.zone-chat {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f3ef;
+    height: 100%;
+    padding: 24px 32px 90px 32px;
+}
+
+/* En-tête conversation */
+.entete-conversation {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.nom-interlocuteur {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Container messages */
+.messages-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0px;
+    display: flex;
+    flex-direction: column; 
+    gap: 8px;
+    justify-content: flex-end;
+    margin-bottom: 60px;
+}
+
+/* Chaque message = pile verticale (header au-dessus, bulle en dessous) */
+.message-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin-bottom: 2px;
+    padding: 8px 12px;
+}
+
+/* Alignements globaux selon le côté */
+.message-recu {
+    align-self: flex-start;
+    text-align: left;
+}
+.message-envoye {
+    align-self: flex-end;
+    text-align: right;
+}
+
+/* Ligne avatar + heure (au-dessus de la bulle) */
+.message-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+/* Taille avatar dans les messages (plus petit) */
+.message-header .photo-profil {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Heure (au-dessus de la bulle) */
+.message-heure {
+    font-size: 11px;
+    color: var(--gris-texte);
+}
+
+/* Header calé à gauche pour reçus, à droite pour envoyés */
+.message-recu .message-header { justify-content: flex-start; }
+.message-envoye .message-header { justify-content: flex-end; }
+
+/* Bulles de messages */
+.message-bulle {
+    display: inline-block;
+    max-width: 100%;        
+    padding: 8px 12px;  
+    font-size: 14px;
+    line-height: 1.3;
+    background-color: var(--Fond-blanc);
+    white-space: normal;    
+    word-break: break-word;  
+    border-radius: 4px;
+}
+
+.message-envoye .message-bulle { 
+    padding: 8px 12px;  
+    align-self: flex-end;
+    border-radius: 4px; 
+}
+
+/* Couleurs bulles */
+.message-envoye .message-bulle {
+    background-color: var(--fond-formulaire);
+    color: #000;
+    padding: 8px 12px;  
+    border-bottom-right-radius: 0;
+    border-radius: 4px;
+}
+.message-recu .message-bulle {
+    background-color: var(--Fond-blanc);
+    color: #000;
+    padding: 8px 12px;  
+    border-bottom-left-radius: 0;
+    border-radius: 4px;
+}
+
+
+/* Formulaire d'envoi */
+.zone-saisie {
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.form-envoi {
+    display: flex;
+    gap: 10px;
+    border-radius: 10px;
+}
+
+.champ-message {
+    flex-grow: 1;
+    height: 49px;
+    padding: 0 18px;
+    font-size: 14px;
+    border: 1px solid #f0f0f0;
+    outline: none;
+    background: #fff;
+    border-radius: 6px; 
+    margin: 0px;
+}
+
+/* Message par défaut si aucune conversation sélectionnée */
+.aucune-conversation {
+    margin: auto;
+    font-size: 18px;
+    color: #666;
+    text-align: center;
+}
+
+/* Adapte la taille du bouton "Envoyer" dans la messagerie */
+.zone-saisie .bouton {
+    margin: 0;
+    height: 49px;
+    padding: 0 22px;
+    font-size: 14px;
 }

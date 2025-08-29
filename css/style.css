@@ -10,8 +10,9 @@
     --Fond-blanc: #ffffff;
 }
 main {
-    width: 1440px;
-    margin: 0 auto; 
+    width: 100%;
+    margin: 0 auto;
+    background-color: var(--fond-secondaire); 
 }
 
 body {
@@ -1189,4 +1190,142 @@ input:autofill {
     height: 49px;
     padding: 0 22px;
     font-size: 14px;
+}
+
+
+/* ========= PAGE ÉDITION D'UN LIVRE ========= */
+
+#edition-livre{
+    background-color: var(--fond-secondaire);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+/* En-tête */
+.entete-edition{
+    max-width:1100px;
+    width:100%;
+    margin:16px auto 0;
+}
+.entete-edition {
+    font-size:14px;
+    text-decoration:none;
+    color:var(--noir-texte);
+}
+
+
+.fil-ariane-retour{
+    color: var(--gris-texte);
+}
+.entete-edition .fil-ariane i{ 
+    font-size:10px; 
+    margin-right:6px; 
+}
+
+#titre-edition-livre{ 
+    font-size:26px; 
+    font-weight:400; 
+    margin:8px 0 0; 
+}
+
+/* Bloc principal */
+.conteneur-edition{
+    max-width:1100px;
+    width:100%;
+    margin:16px auto 40px;
+    background:var(--Fond-blanc);
+    border-radius:20px;
+    padding:32px;
+    display:grid;
+    grid-template-columns: 420px 1fr;   /* colonne image + colonne formulaire */
+    gap:48px;
+}
+
+/* Colonne gauche : photo */
+.bloc-photo-livre p{
+    color:var(--gris-texte);
+    font-size:14px;
+    margin:0 0 10px;
+}
+.photo-livre__img{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+    display:block;
+    border-radius:6px;
+}
+.photo-livre__placeholder{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f0f0f0;
+    color:#999;
+    border:1px solid #e6e6e6;
+    border-radius:6px;
+}
+
+/* Lien “Modifier la photo” */
+.bloc-photo-livre form{ text-align:right; margin-top:10px; }
+.bouton-fichier{
+    font-size:12px;
+    color:var(--noir-texte);
+    text-decoration:underline;
+    cursor:pointer;
+}
+.bouton-fichier:hover{ color:#666; }
+#book_picture{ display:none; }
+
+
+.formulaire-edition{
+    width: 80%;
+    margin-left: 100px;
+}
+/* Colonne droite : formulaire */
+.formulaire-edition label{
+    font-size:14px;
+    color:var(--gris-texte);
+    margin:14px 0 6px;
+    display:block;
+}
+.formulaire-edition input[type="text"],
+.formulaire-edition select{
+    width:100%;
+    background:var(--fond-formulaire); 
+    border:1px solid #e6eaf0;
+    border-radius:6px;
+    font-size:14px;
+    padding:12px 14px;
+    outline:none;
+    box-sizing:border-box;
+    margin:0 0 12px;
+}
+.formulaire-edition textarea{
+    width: 100%;
+    height: 300px;
+    background-color: var(--fond-formulaire);
+    font-size: 14px;
+    padding: 15px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    outline: none;
+}
+
+.bouton-edit {
+    width: 322px;
+    height: 63px;
+    display: inline-block;
+    padding: 22px 38px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--fond-principal);
+    background-color: var(--vert-principal);
+    border: none;
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    transition: background-color 0.5s ease-out;
 }

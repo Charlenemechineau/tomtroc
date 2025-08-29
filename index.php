@@ -8,72 +8,116 @@ $action = Utils::request('action', 'home');
 
 try {
     switch ($action) {
-        case 'home':
-            $bookController = new BookController();
-            $bookController->showHome();
-            break;
+         case 'home':
+        // Accueil : affiche les derniers livres
+        $bookController = new BookController();
+        $bookController->showHome();
+        break;
 
         case 'books':
-            $bookController= new BookController();
+            // Page "Nos livres à l'échange" : liste tous les livres//
+            $bookController = new BookController();
             $bookController->showAllBooks();
             break;
 
         case 'detailBook':
+            // Détail d’un livre affiche la fiche du livre + propriétaire //
             $bookController = new BookController();
             $bookController->showBookDetails();
             break;
-        
+
         case 'rechercheLivres':
+            // Recherche : filtre les livres par titre //
             $bookController = new BookController();
             $bookController->rechercherLivres();
             break;
-        
+
+        // --- Authentification / Compte ---//
+
         case 'loginUser':
+            // Affiche le formulaire de connexion//
             $userController = new UserController();
-            $userController->showLoginForm(); 
+            $userController->showLoginForm();
             break;
 
         case 'processLogin':
+            // Traite la connexion d'un compte utilisateur//
             $userController = new UserController();
             $userController->loginUser();
             break;
 
         case 'register':
+            // Affiche le formulaire d'inscription//
             $userController = new UserController();
             $userController->showRegisterForm();
             break;
 
         case 'processRegister':
+            // Traite l'inscription //
             $userController = new UserController();
             $userController->registerUser();
             break;
 
         case 'logout':
+            // Déconnecte l'utilisateur puis redirige//
             $userController = new UserController();
             $userController->logoutUser();
             break;
 
         case 'myAccount':
+            // Page "Mon compte" : liste les livres de l'utilisateur connecté//
             $userController = new UserController();
             $userController->showMyAccount();
             break;
 
         case 'updateAccount':
-            $userController = new UserController();   
+            // Met à jour les informations du compte utilisateur //
+            $userController = new UserController();
             $userController->updateAccount();
             break;
 
+        // --- Messagerie ---
+
         case 'messagerie':
+            // Affiche la messagerie : liste de conversations + fil.
+            // Option GET 'user' pour ouvrir directement une conversation avec cet utilisateur.//
             $messageController = new MessageController();
-            $messageController->showMessages(); // méthode pour afficher la messagerie
+            $messageController->showMessages();
             break;
 
         case 'sendMessage':
+            // Envoie un message puis redirige vers la messagerie//
             $messagerieController = new MessageController();
-            $messagerieController->sendMessage(); // méthode pour envoyer un message 
+            $messagerieController->sendMessage();
             break;
 
+        // --- Édition des livres ---
 
+        case 'editBook':
+            // Affiche le formulaire d’édition d’un livre //
+            $bookController = new BookController();
+            $bookController->showEditBook();
+            break;
+
+        case 'updateBookDetails':
+            // Met à jour les champs texte d’un livre (POST: book_id, title, author, description, disponibilite)//
+            // Redirige ensuite (ex: vers myAccount)//
+            $bookController = new BookController();
+            $bookController->updateBookDetails();
+            break;
+
+        case 'updateBookImage':
+            // Met à jour uniquement la photo de couverture//
+            // Redirige ensuite//
+            $bookController = new BookController();
+            $bookController->updateBookImage();
+            break;
+
+        case 'deleteBook':
+            // Permet la suppression un livre //
+            $bookController = new BookController();
+            $bookController->deleteBook();
+            break;
 
         default:
             throw new Exception("L'action demandée n'est pas prise en charge.");

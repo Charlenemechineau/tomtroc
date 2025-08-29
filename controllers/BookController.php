@@ -38,7 +38,7 @@ class BookController
         ]);
     }
 
-    //Function qui va me permettre de récupérer//
+    //Function qui va me permettre de récupérer les éléments du detail d'un livre//
     public function showBookDetails()
     {
         // Récupère l'id du livre depuis l'URL (ex: index.php?action=bookDetails&id=3)//
@@ -112,4 +112,86 @@ class BookController
     }
 }
 
+
+//************************************* partie controller template editBook ***********************/
+
+// Méthode qui affiche le formulaire de modification //
+public function showEditBook() : void
+{
+    // Récupérer l'id depuis l'URL
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+    if ($id <= 0) { Utils::redirect('myAccount'); return; }
+
+    // Charger le livre
+    $bookManager = new BookManager();
+    $book = $bookManager->getBookById($id);
+    if (!$book) { Utils::redirect('myAccount'); return; }
+
+    // Afficher la vue d’édition
+    $view = new View("Modifier un livre");
+    // Fichier attendu : views/editbook.php //
+    $view->render("editbook", ['book' => $book]);
+}
+
+//Méthode qui va traiter la mise à jour des champs texte (title/author/description/disponibilite) d'un livre//
+// Met à jour les infos texte d’un livre (titre, auteur, description, disponibilité)
+public function updateBookDetails() : void
+{
+    // Ne traite cette action que si le formulaire a bien été envoyé en POST//
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') { 
+        Utils::redirect('myAccount'); 
+        return; 
+    }
+
+    // Orécupère l’ID du livre envoyé par le champ caché du formulaire//
+    $id = (int)($_POST['book_id'] ?? 0);
+
+    // lit les champs du formulaire ( "trim" permet d'enlever les espaces inutiles)//
+    $title        = trim($_POST['title'] ?? '');
+    $author       = trim($_POST['author'] ?? '');
+    $description  = trim($_POST['description'] ?? '');
+    $disponibilite= trim($_POST['disponibilite'] ?? 'Disponible');
+
+    // appelle le modèle pour enregistrer en base de données//
+    $bookManager = new BookManager();
+    $bookManager->updateBookDetails($id, $title, $author, $description, $disponibilite);
+
+    // valider pour retourner sur la page "Mon compte"//
+    Utils::redirect('myAccount');
+}
+
+
+// Change uniquement la photo de couverture d’un livre//
+public function updateBookImage(): void
+{
+    // Action autorisée seulement si le formulaire a été envoyé en POST//
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') { 
+        Utils::redirect('myAccount'); 
+        return; 
+    }
+
+    // Récupère l’ID du livre et le fichier envoyé//
+    $bookId = (int)($_POST['book_id'] ?? 0);
+    $file   = $_FILES['book_picture'] ?? null;
+
+    // Dossier où sont stockées les images //
+    $targetDir = 'images/';
+
+    // On vérifie qu’on a bien un livre + un fichier valide
+    if ($bookId && $file && $file['error'] === UPLOAD_ERR_OK) {
+
+        //  On fabrique un nom de fichier unique pour éviter d’écraser une ancienne image//
+        $fileName = uniqid('book_'.$bookId.'_') . '_' . basename($file['name']);
+
+        // On déplace le fichier uploadé dans le dossier cible//
+        if (move_uploaded_file($file['tmp_name'], $targetDir . $fileName)) {
+
+            // Si tout va bien, on enregistre SEULEMENT le nom du fichier en base//
+            (new BookManager())->updateBookImage($bookId, $fileName);
+        }
+    }
+
+    // On  reste sur editBook pour verifier que la bonne photo est bien changé)
+     Utils::redirect('editBook', ['id' => $bookId]);
+}
 }

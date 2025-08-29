@@ -5,59 +5,58 @@
 class BookManager extends AbstractEntityManager
 {
     /**
-     * Récupère tous les livres stockés dans la table `book`.
+     * Récupère tous les livres stockés dans la table `book`.//
      * 
-     * @return Book[] Un tableau d'objets Book représentant tous les livres.
+     * @return Book[] Un tableau d'objets Book représentant tous les livres.//
      */
     public function getAllBooks() : array
     {
-        // Requête SQL pour sélectionner toutes les colonnes de tous les livres.
+        // Requête SQL pour sélectionner toutes les colonnes de tous les livres.//
         $sql = "SELECT book.*, users.pseudo, users.picture_user 
                 FROM book 
                 LEFT JOIN users ON book.user_id = users.id";
 
 
-        // Exécution de la requête.
+        // Exécution de la requête.//
         $result = $this->db->query($sql);
 
-        // Tableau qui contiendra tous les objets Book.
+        // Tableau qui contiendra tous les objets Book.//
         $books = [];
 
-        // Parcours des résultats ligne par ligne.
+        // Parcours des résultats ligne par ligne.//
         while ($book = $result->fetch()) {
-            // Création d'un objet Book à partir des données récupérées et ajout au tableau.
+            // Création d'un objet Book à partir des données récupérées et ajout au tableau.//
             $books[] = new Book($book);
         }
 
-        // Retourne le tableau complet d'objets Book.
+        // Retourne le tableau complet d'objets Book.//
         return $books;
     }
 
     /**
-     * Récupère les derniers livres ajoutés dans la table `book`.
+     * Récupère les derniers livres ajoutés dans la table `book`.//
      * 
      * @param int $limite Le nombre maximum de livres à récupérer (par défaut 4).
      * @return Book[] Un tableau d'objets Book représentant les derniers livres.
      */
     public function getLastBooks(int $limite = 4) : array
     {
-        // Requête SQL pour récupérer un nombre limité de livres.
+        // Requête SQL pour récupérer un nombre limité de livres.//
         $sql = "SELECT * FROM book LIMIT " . $limite;
 
-        // Exécution de la requête.
+        // Exécution de la requête.//
         $result = $this->db->query($sql);
 
-        // Tableau pour stocker les livres récupérés.
+        // Tableau pour stocker les livres récupérés.//
         $books = [];
 
-        // Parcours des résultats.
+        // Parcours des résultats.//
         while ($book = $result->fetch()) {
-            // Création d'un objet Book et ajout au tableau.
+            // Création d'un objet Book et ajout au tableau.//
             $books[] = new Book($book);
         }
 
-        // Retourne le tableau des derniers livres.
-        return $books;
+        // Retourne le tableau des derniers livres.//
     }
 
 
@@ -68,21 +67,21 @@ class BookManager extends AbstractEntityManager
  * @return Book|null Retourne un objet Book si trouvé, sinon null.
  */
 
-    // Prépare la requête SQL avec un paramètre nommé :id pour sélectionner un livre par son identifiant
+    // Prépare la requête SQL avec un paramètre nommé :id pour sélectionner un livre par son identifiant//
     public function getBookById(int $id): ?Book
 {
     $sql = "SELECT * FROM book WHERE id = :id";
 
-    // Préparer la requête (pour gérer le paramètre :id)
+    // Préparer la requête (pour gérer le paramètre :id)//
     $stmt = $this->db->prepare($sql);
 
-    // Lier la valeur $id au paramètre :id
+    // Lier la valeur $id au paramètre :id//
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
-    // Exécuter la requête
+    // Exécuter la requête//
     $stmt->execute();
 
-    // Récupérer une seule ligne de résultat
+    // Récupérer une seule ligne de résultat//
     $data = $stmt->fetch();
 
 
@@ -153,4 +152,60 @@ public function getBooksByUserId(int $userId): array
     
     return $books;
 }
+
+
+
+/************************************template editBook ********************************/
+
+/**
+ * Met à jour les infos texte d'un livre.
+ * Champs gérés : title, author, description, disponibilite
+ */
+
+public function updateBookDetails(int $id, string $title, string $author, string $description, string $disponibilite): bool
+{
+    $sql = "UPDATE book
+                SET title = :title,
+                    author = :author,
+                    description = :description,
+                    disponibilite = :dispo
+            WHERE id = :id";
+
+    $stmt = $this->db->prepare($sql);
+    return $stmt->execute([
+        ':title' => $title,
+        ':author' => $author,
+        ':description' => $description,
+        ':dispo' => $disponibilite,
+        ':id' => $id
+    ]);
+}
+
+/**
+ * Met à jour l'image d'un livre 
+ * 
+ */
+public function updateBookImage(int $id, string $filename): bool
+{
+    $stmt = $this->db->prepare("UPDATE book SET image = :img WHERE id = :id");
+    return $stmt->execute([
+        ':img' => $filename,
+        ':id'  => $id
+    ]);
+}
+
+/**
+ * Suppression d'un livre.
+ *
+ */
+public function deleteBook(int $id, int $ownerId): bool
+{
+    $sql = "DELETE FROM book WHERE id = :id AND user_id = :uid";
+    $stmt = $this->db->prepare($sql);
+    return $stmt->execute([
+        ':id'  => $id,
+        ':uid' => $ownerId
+    ]);
+}
+
 }

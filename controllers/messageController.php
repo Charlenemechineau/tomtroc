@@ -76,7 +76,7 @@ class MessageController
             }
         }
 
-        // Redirige vers la messagerie //
+        // Redirige vers la messagerie ou le message ouvert //
         Utils::redirect('messagerie', ['user' => $recipientId]);
     }
 }

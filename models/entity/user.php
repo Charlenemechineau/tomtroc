@@ -1,5 +1,5 @@
 <?php
-//Classe représentant un utilisateur notamment en récupérant les données depuis la base de données.
+// Classe représentant un utilisateur notamment en récupérant les données depuis la base de données.
 // Elle hérite d'AbstractEntityManager qui contient la connexion $db.
 
 class User extends AbstractEntity

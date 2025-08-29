@@ -11,22 +11,37 @@ class MessageManager extends AbstractEntityManager
      * @param int $userId L'identifiant de l'utilisateur connecté.
      * @return array Liste de conversations (tableaux associatifs).
      */
-    public function getUserConversations($userId) {
-        $stmt = $this->db->prepare("
-            SELECT c.id AS conversation_id,
+    public function getUserConversations(int $userId): array
+    {
+        $sql = "
+            SELECT 
+                c.id AS conversation_id,
                 u.id AS participant_id,
                 u.pseudo,
                 u.picture_user,
-                (SELECT m.message FROM messages m WHERE m.conversation_id = c.id ORDER BY m.sent_date DESC LIMIT 1) AS last_message,
-                (SELECT m.sent_date FROM messages m WHERE m.conversation_id = c.id ORDER BY m.sent_date DESC LIMIT 1) AS last_message_date
+                (SELECT m.message 
+                FROM messages m 
+                WHERE m.conversation_id = c.id 
+                ORDER BY m.sent_date DESC 
+                LIMIT 1) AS last_message,
+                (SELECT m.sent_date 
+                FROM messages m 
+                WHERE m.conversation_id = c.id 
+                ORDER BY m.sent_date DESC 
+                LIMIT 1) AS last_message_date,
+                (SELECT m.sender_id
+                FROM messages m
+                WHERE m.conversation_id = c.id
+                ORDER BY m.sent_date DESC
+                LIMIT 1) AS last_sender_id
             FROM conversations c
             JOIN users u ON (u.id = c.user1_id OR u.id = c.user2_id)
             WHERE (c.user1_id = :userId OR c.user2_id = :userId)
-            AND u.id != :userId
+            AND u.id <> :userId
             ORDER BY last_message_date DESC
-        ");
-        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $stmt->execute();
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':userId' => $userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -124,25 +139,4 @@ class MessageManager extends AbstractEntityManager
         return $this->db->lastInsertId();
     }
 
-    /**
-     * Vérifie si une conversation existe déjà entre deux utilisateurs.
-     * Retourne un tableau ['id' => ...] si trouvée, sinon null.
-     *
-     * @param int $user1Id ID du premier utilisateur.
-     * @param int $user2Id ID du second utilisateur.
-     * @return array|null La conversation trouvée (id) ou null si aucune.
-     */
-    public function getConversationByUserIds($user1Id, $user2Id) {
-        $stmt = $this->db->prepare("
-            SELECT id 
-            FROM conversations
-            WHERE (user1_id = :user1Id AND user2_id = :user2Id)
-            OR (user1_id = :user2Id AND user2_id = :user1Id)
-            LIMIT 1
-        ");
-        $stmt->bindParam(':user1Id', $user1Id, PDO::PARAM_INT);
-        $stmt->bindParam(':user2Id', $user2Id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 }

@@ -1,6 +1,6 @@
 <?php
-// Classe représentant un livre, avec ses propriétés et méthodes d'accès.
-// Hérite d'AbstractEntity.
+// Classe représentant un livre, avec ses propriétés et méthodes d'accès.//
+// Hérite d'AbstractEntity.//
  class Book extends AbstractEntity
  {
     private string $title;

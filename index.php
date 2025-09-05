@@ -76,6 +76,11 @@ try {
             $userController->updateAccount();
             break;
 
+        case 'updateProfilePicture':
+            //Met à jour la photo de profil de l'utilisateur//
+            $userController = new UserController();
+            $userController->updateProfilePicture();
+            break;
         // --- Messagerie ---
 
         case 'messagerie':
@@ -117,6 +122,12 @@ try {
             // Permet la suppression un livre //
             $bookController = new BookController();
             $bookController->deleteBook();
+            break;
+        
+        case 'userProfile':
+            // Profil public : affiche les infos d’un utilisateur + ses livres //
+            $userController = new UserController();
+            $userController->showPublicProfile();
             break;
 
         default:

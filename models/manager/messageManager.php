@@ -2,12 +2,13 @@
 
 class MessageManager extends AbstractEntityManager
 {
-     /**
+    /**
+     * Affiche dans la colonne de gauche la liste des conversations de l’utilisateur connecté
      * Récupère toutes les conversations d'un utilisateur, avec :
      *  - les infos de l'autre participant (id, pseudo, picture_user),
      *  - le dernier message (texte),
      *  - la date du dernier message.
-     *
+     *  - 
      * @param int $userId L'identifiant de l'utilisateur connecté.
      * @return array Liste de conversations (tableaux associatifs).
      */
@@ -46,8 +47,8 @@ class MessageManager extends AbstractEntityManager
     }
 
     /**
+     * Affiche le fil de discussion d’une conversation
      * Récupère tous les messages d'une conversation (ordre chronologique naturel).
-     *
      * @param int $conversationId ID de la conversation
      * @return array Liste de messages (id, message, sender_id, pseudo, picture_user, sent_date)
      */
@@ -119,7 +120,25 @@ class MessageManager extends AbstractEntityManager
 
         return $result;
     }
+    // Vérifie s'il existe déjà une conversation entre 2 utilisateurs.
+    // Retourne ['id' => <id>] si trouvée, sinon null.
+    public function getConversationByUserIds(int $user1Id, int $user2Id): ?array
+    {
+        $sql = "
+            SELECT id
+            FROM conversations
+            WHERE (user1_id = :u1 AND user2_id = :u2)
+            OR (user1_id = :u2 AND user2_id = :u1)
+            LIMIT 1
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':u1', $user1Id, PDO::PARAM_INT);
+        $stmt->bindValue(':u2', $user2Id, PDO::PARAM_INT);
+        $stmt->execute();
 
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
     /**
      * Crée une nouvelle conversation entre deux utilisateurs.
      * Initialise created_at et last_message_at à NOW().

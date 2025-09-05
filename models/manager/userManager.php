@@ -180,17 +180,12 @@ class UserManager extends AbstractEntityManager
  */
 public function updateProfilePicture(int $userId, string $photoUtilisateur): bool
 {
-    // Préparation de la requête SQL pour mettre à jour la photo de profil de l'utilisateur identifié par son ID
-    $sql = "UPDATE users SET profile_picture = :profile_picture WHERE id = :id";
+    $sql = "UPDATE users SET picture_user = :picture_user WHERE id = :id";
 
-    // Prépare la requête PDO
     $stmt = $this->db->prepare($sql);
-
-    // Lie les paramètres à leurs valeurs
-    $stmt->bindValue(':profile_picture', $photoUtilisateur, PDO::PARAM_STR);
+    $stmt->bindValue(':picture_user', $photoUtilisateur, PDO::PARAM_STR);
     $stmt->bindValue(':id', $userId, PDO::PARAM_INT);
 
-    // Exécute la requête et retourne true si ça a fonctionné, false sinon
     return $stmt->execute();
 }
 }

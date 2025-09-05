@@ -57,6 +57,7 @@ class BookManager extends AbstractEntityManager
         }
 
         // Retourne le tableau des derniers livres.//
+    return $books;   
     }
 
 

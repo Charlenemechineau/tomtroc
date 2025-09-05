@@ -113,7 +113,7 @@ class BookController
 }
 
 
-//************************************* partie controller template editBook ***********************/
+//************************************* partie template editBook ***********************/
 
 // Méthode qui affiche le formulaire de modification //
 public function showEditBook() : void

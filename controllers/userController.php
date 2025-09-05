@@ -155,52 +155,83 @@ class UserController
         }
     }
 
-        /**
-     * Gère la mise à jour de la photo de profil de l'utilisateur connecté.
-     * 
-     * Étapes :
-     * - Vérifie que le formulaire a bien été soumis par POST et qu’un fichier a été envoyé.
-     * - Récupère l’utilisateur en session et son ID.
-     * - Gère le nom du fichier de manière unique pour éviter les doublons.
-     * - Déplace le fichier dans le dossier de stockage des photos.
-     * - Met à jour la base de données avec le nouveau nom de fichier via le UserManager.
-     * - Met à jour l'objet utilisateur en session pour refléter la nouvelle image.
-     * - Redirige vers la page 'Mon compte' qu’il y ait une image ou non.
-     */
-    public function updateProfilePicture(): void
-    {
-        // Vérifie que le formulaire a été soumis en POST et qu’un fichier a bien été envoyé
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['profile_picture']['tmp_name'])) {
+    /**
+ * Met à jour la photo de profil de l’utilisateur connecté.
+ *
+ * Étapes :
+ * 1) Vérifier que l’utilisateur est connecté et que le formulaire a bien été envoyé en POST.
+ * 2) Récupérer le fichier envoyé via l’input "profile_picture".
+ * 3) Générer un nom de fichier unique et définir le dossier de destination.
+ * 4) Déplacer le fichier sur le serveur puis enregistrer le nouveau nom en base.
+ * 5) Mettre à jour la session et rediriger vers la page "Mon compte".
+ */
+public function updateProfilePicture(): void
+{
+    // 1) Sécurité : on s’assure que l’utilisateur est connecté et que la requête est bien un POST
+    if (!isset($_SESSION['user'])) { Utils::redirect('loginUser'); return; }
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') { Utils::redirect('myAccount'); return; }
 
-            // Récupère l'utilisateur connecté depuis la session et son ID
-            $user = $_SESSION['user'];
-            $userId = $user->getId();
-
-            // Récupère le fichier envoyé par l'utilisateur
-            $file = $_FILES['profile_picture'];
-
-            // Génère un nom de fichier unique pour éviter les conflits avec d’autres fichiers
-            $fileName = uniqid() . "_" . basename($file['name']);
-
-            // Définition du dossier de destination pour stocker les photos de profil
-            $targetDir = "./css/user_pic/";
-            $targetFile = $targetDir . $fileName;
-
-            // Déplace le fichier téléchargé vers le dossier cible
-            if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-                // Met à jour l'image de profil dans la base de données
-                $this->userManager->updateProfilePicture($userId, $fileName);
-
-                // Met à jour l'objet utilisateur en session avec la nouvelle image
-                $user->setPictureUser($fileName);
-                $_SESSION['user'] = $user;
-            }
-
-            // Redirige l’utilisateur vers la page "Mon compte"
-            Utils::redirect('myAccount');
-        } else {
-            // Si aucune image n’a été envoyée, redirige aussi vers "Mon compte"
-            Utils::redirect('myAccount');
-        }
+    // 2) On vérifie qu’un fichier a bien été envoyé et sans erreur
+    if (empty($_FILES['profile_picture']) || $_FILES['profile_picture']['error'] !== UPLOAD_ERR_OK) {
+        Utils::redirect('myAccount');
+        return;
     }
+
+    $user   = $_SESSION['user'];
+    $userId = (int)$user->getId();
+    $file   = $_FILES['profile_picture'];
+
+    // 3) On fabrique un nom unique et on définit le dossier où enregistrer l’image
+    $fileName   = uniqid('user_' . $userId . '_') . '_' . basename($file['name']);
+    $targetDir  = 'images/pictures/';   // même dossier que celui utilisé dans l’attribut src de <img>
+    $targetPath = $targetDir . $fileName;
+
+    // 4) On déplace le fichier et, si tout va bien, on met à jour la BDD puis la session
+    if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+        (new UserManager())->updateProfilePicture($userId, $fileName);
+        $user->setPictureUser($fileName);    // met à jour l’objet en session pour afficher la nouvelle photo immédiatement
+        $_SESSION['user'] = $user;
+    }
+
+    // 5) On retourne sur la page “Mon compte”
+    Utils::redirect('myAccount');
+}
+
+
+ //****************************Partie template profil utilisateurs******************/
+ 
+ public function showPublicProfile(): void
+{
+    $userId = (int)($_GET['id'] ?? 0);
+    if ($userId <= 0) { Utils::redirect('home'); return; }
+
+    $userManager = new UserManager();
+    $bookManager = new BookManager();
+
+    $user  = $userManager->getUserById($userId);
+    if (!$user) { Utils::redirect('home'); return; }
+
+    $books = $bookManager->getBooksByUserId($userId);
+    $bookCount = count($books);
+
+
+    $membreDepuis = '';
+    if (method_exists($user, 'getCreatedAt') && $user->getCreatedAt()) {
+        try {
+            $d1 = new DateTime($user->getCreatedAt());
+            $diff = $d1->diff(new DateTime());
+            if ($diff->y >= 1)   $membreDepuis = $diff->y.' an'.($diff->y>1?'s':'');
+            elseif ($diff->m>=1) $membreDepuis = $diff->m.' mois';
+            else                  $membreDepuis = $diff->d.' jour'.($diff->d>1?'s':'');
+        } catch (Throwable $e) {}
+    }
+
+    $view = new View("Profil public");
+    $view->render("publicProfil", [
+        'user'         => $user,
+        'books'        => $books,
+        'bookCount'    => $bookCount,
+        'membreDepuis' => $membreDepuis,
+    ]);
+}
 }

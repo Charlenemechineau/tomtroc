@@ -9,19 +9,20 @@
     --fond-formulaire: #edf2f6;
     --Fond-blanc: #ffffff;
 }
-main {
-    width: 100%;
-    margin: 0 auto;
-    background-color: var(--fond-secondaire); 
-}
+
 
 body {
     background-color: var(--fond-principal);
-    margin: 0;
+    width: 1440px;
+    margin: auto;
     display: flex;
     flex-direction: column;
 }
 
+
+main {
+    background-color: var(--fond-secondaire);
+}
 #main-content {
     flex-grow: 1;
 }
@@ -570,6 +571,7 @@ header a {
     margin-bottom: 30px;
     outline: none;
     padding: 0 20px;
+    background-color: var(--Fond-blanc) !important;
 }
 
 .connexion-formulaire label {
@@ -629,6 +631,7 @@ header a {
     margin-bottom: 30px;
     outline: none;
     padding: 0 20px;
+    background-color: var(--Fond-blanc) !important;
 }
 
 .formulaire-connexion.inscription .bouton {
@@ -658,21 +661,19 @@ header a {
 
 .section-mon-compte {
     display: flex;
+    align-items: normal;
     flex-direction: column;
-    margin: 45px 155px 100px 150px;
     max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #FaF9f7;
+    margin: auto;
+    background-color: var(--fond-secondaire);
 }
 
 .titre-page-compte {
     font-family: "Playfair Display", serif;
     font-weight: 400;
-    font-size: 2.5rem;
+    font-size: 26px;
     color: var(--noir-texte);
     margin-bottom: 30px;
-    text-align: center;
 }
 
 /* Conteneur principal : 2 colonnes */
@@ -715,7 +716,6 @@ header a {
 }
 
 .ligne-separation {
-    width: 220px;
     top : 506px;
     left: 307px;
     border: 1px;
@@ -831,7 +831,7 @@ input:autofill {
 
 /* Section livres */
 .section-voslivres {
-    background: white;
+    background: var(--Fond-blanc);
     margin-top: 35px;
     border-radius: 20px;
     padding: 35px 50px;
@@ -858,6 +858,7 @@ input:autofill {
     font-size: 13px;
     padding: 15px 10px;
     text-align: left;
+    border-bottom: solid 0.5px var(--fond-principal);
 }
 
 .tableau-livres td {
@@ -876,10 +877,9 @@ input:autofill {
     border-radius: 5px;
 }
 
-/* Limiter description à 4 lignes avec ellipsis */
-.tableau-livres td:nth-child(4) p {
-    overflow: hidden;
-    font-style: italic;
+/* Colonne Description en italique (4e colonne) */
+.tableau-livres tbody td:nth-child(4) {
+  font-style: italic;
 }
 
 /* Statuts disponibilité */
@@ -931,11 +931,11 @@ input:autofill {
 }
 
 .ligne-paire {
-    background-color: var(--fond-formulaire) !important; /* gris très clair */
+    background-color: var(--Fond-blanc) !important; /* gris très clair */
 }
 
 .ligne-impaire {
-    background-color: #f5f3ef !important; /* blanc */
+    background-color:var(--fond-formulaire) !important; /* blanc */
 }
 
 
@@ -946,14 +946,14 @@ input:autofill {
     justify-content: center;
     font-family: Arial, sans-serif;
     margin-bottom: 0px !important;
+    background-color: var(--fond-principal);
 }
 
 .conteneur-messagerie {
     display: flex;
     width: 100%;
-    height: 893px;
+    height: 900px;
     max-width: 1200px;
-    background-color: #fff;
     overflow: hidden;
 }
 
@@ -977,7 +977,7 @@ input:autofill {
 }
 
 .liste-conversations {
-    background-color: var(--fond-secondaire);
+    background-color: #FAF9F7;
     width: 308px;
 
 }
@@ -1043,7 +1043,7 @@ input:autofill {
     flex-direction: column;
     background-color: #f5f3ef;
     height: 100%;
-    padding: 24px 32px 90px 32px;
+    padding: 24px 32px 60px 32px;
 }
 
 /* En-tête conversation */
@@ -1151,6 +1151,10 @@ input:autofill {
     border-radius: 4px;
 }
 
+/* Conversation sélectionnée  */
+.liste-conversations .element-conversation.active{
+  background: #fff;
+} 
 
 /* Formulaire d'envoi */
 .zone-saisie {
@@ -1186,8 +1190,8 @@ input:autofill {
 
 /* Adapte la taille du bouton "Envoyer" dans la messagerie */
 .zone-saisie .bouton {
-    margin: 0;
-    height: 49px;
+    margin-top: 2px;
+    height: 44px;
     padding: 0 22px;
     font-size: 14px;
 }
@@ -1329,3 +1333,160 @@ input:autofill {
     margin-bottom: 40px;
     transition: background-color 0.5s ease-out;
 }
+
+/******************************Partir profil et bibliothéque utilisateur******************************************/
+
+#profil-public .conteneur-compte{
+    display:flex; 
+    gap:24px; 
+    align-items:flex-start;
+    max-width:1100px; 
+    margin:20px auto 60px;
+}
+
+.section-mon-compte-bis {
+    display: flex;
+    flex-direction: column;
+    margin: 45px 155px 100px 150px;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Colonne gauche (identité) */
+#profil-public .bloc-gauche{
+    width: 341px; 
+    height: 579px;
+    background:#fff; 
+    border-radius:20px; 
+    text-align:center;
+}
+
+#profil-public .image-profil{
+    width:120px; 
+    height:120px; 
+    border-radius:50%; 
+    object-fit:cover; 
+    display:block; 
+    margin:0 auto 12px;
+}
+
+#profil-public .ligne-separation-bis{ 
+    color:#eee; 
+    margin:8px 30px 8px 30px ; 
+    text-align:center;
+    
+}
+
+#profil-public .pseudo-profil{
+    font-size:24px;
+    margin:6px 0 6px; 
+}
+
+#profil-public .membre-depuis{ 
+    font-size:13px; 
+    font-weight: 400;
+    color:var(--gris-texte); 
+    margin:0 0 14px; 
+}
+
+#profil-public .titre-bibliotheque{ 
+    margin:8px 0 8px; 
+}
+#profil-public .infos-bibliotheque{
+    display:flex; 
+    justify-content:center; 
+    align-items:center; gap:8px;
+    border-radius:10px; 
+    padding:8px 10px; 
+    margin-bottom:10px;
+}
+#profil-public .icon-biblio{ 
+    width:18px; 
+    height:18px; 
+}
+
+#profil-public .nb-livres{ 
+    margin:0; 
+    color:#444; 
+}
+
+#profil-public .bouton{ 
+    margin-top:8px; 
+}
+
+/* Colonne droite  */
+#profil-public .bloc-droit-bis{
+    width: 745px;
+    height: auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.05);  
+}
+
+#profil-public .section-voslivres-bis{
+    background: var(--Fond-blanc);
+    border-radius: 20px;
+    border-collapse: collapse;
+    width: 100%; 
+}
+
+#profil-public .tableau-livres{
+    width: 100%;
+    border-collapse: collapse;
+}
+#profil-public .tableau-livres thead th{
+    font-size:8px; 
+    font-weight: 600;
+    color:var(--noir-texte); 
+    text-transform:uppercase; 
+    letter-spacing:.4px;
+    padding:8px 10px; text-align:left;
+    text-align: center;
+}
+
+#profil-public .tableau-livres tbody tr td{
+    background:var(--fond-formulaire); 
+    padding:12px 10px; 
+    vertical-align:center;
+    text-align: center;
+}
+
+
+#profil-public .tableau-livres tbody tr:nth-child(even) td{
+    background:#f3f5f8; 
+    }
+
+#profil-public .livre-miniature{
+    width:64px; 
+    height:84px; 
+    object-fit:cover; 
+    border-radius:6px;
+    background:#eee;
+}
+
+#profil-public .aucun-livre{ 
+    text-align:center; 
+    padding:18px 0; 
+    color:#666; 
+}
+
+#profil-public .tableau-livres td a{
+    color:inherit; 
+    text-decoration:none; 
+    font-weight:600;
+}
+#profil-public .tableau-livres td a:hover{ 
+    text-decoration:underline; 
+}
+
+/* LIGNE PAIRE */
+#profil-public .tableau-livres tbody tr.ligne-paire > td {
+  background-color: var(--Fond-blanc); 
+}
+
+/* LIGNE IMPAIRE */
+#profil-public .tableau-livres tbody tr.ligne-impaire > td {
+  background-color: var(--fond-formulaire); 
+}
+

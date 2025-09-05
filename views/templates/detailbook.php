@@ -24,7 +24,11 @@
             <h4>Propriétaire</h4>
             <div class="proprietaire">
                 <img src="images/pictures/<?= htmlspecialchars($user->getPictureUser()) ?>" alt="Photo de profil de <?= htmlspecialchars($user->getPseudo()) ?>" class="photo-profil">
-                <p><a href="index.php?action=userBooks&user_id=<?= htmlspecialchars($user->getId()) ?>"><?= htmlspecialchars($user->getPseudo()) ?></a></p>
+                <p>
+                    <a href="index.php?action=userProfile&id=<?= (int)$user->getId() ?>" class="lien-profil">
+                    <?= htmlspecialchars($user->getPseudo()) ?>
+                    </a>
+                </p>
             </div>
 
             <a href="#" class="bouton">Envoyer un message</a>

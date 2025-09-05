@@ -53,7 +53,7 @@
 
     <!-- Liste des livres -->
     <div class="section-voslivres">
-        <table class="tableau-livres">
+        <table class="tableau-livres table-zebra">
             <thead>
                 <tr>
                     <th>Photo</th>

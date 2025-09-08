@@ -13,8 +13,17 @@ class View
     {
         $viewPath = $this->buildViewPath($viewName);
 
+        // Ajoute automatiquement le compteur de messages non lus
+        $unreadMessagesCount = 0;
+        if (isset($_SESSION['user'])) {
+            $messageManager = new MessageManager();
+            $userId = $_SESSION['user']->getId();
+            $unreadMessagesCount = $messageManager->getUnreadMessagesCount($userId);
+        }
+        
         $content = $this->_renderViewFromTemplate($viewPath, $params);
         $title = $this->title;
+        
         ob_start();
         require(MAIN_VIEW_PATH);
         echo ob_get_clean();
@@ -38,6 +47,4 @@ class View
         return TEMPLATE_VIEW_PATH . $viewName . '.php';
     }
 }
-
-
 

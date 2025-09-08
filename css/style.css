@@ -61,7 +61,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 /***********************************STYLE DES BOUTONS*****************************************/
@@ -202,12 +202,11 @@ header a {
 }
 
 #section-decouverte {
-    max-width: 1200px;
-    margin: 80px auto;
     display: flex;
     gap: 80px;
     align-items: center;
-    padding: 40px;
+    padding: 60px;
+    background-color: var(--fond-principal);
 }
 
 .img-decouverte {
@@ -229,7 +228,6 @@ header a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px 0;
 }
 
 .cartes-livres {
@@ -278,12 +276,15 @@ header a {
 .section-infos {
     flex-direction: column;
     text-align: center;
-    background-color: #f6f4f1; 
+    background-color: #f6f4f1;
+    height: 602px;
+    margin-bottom: 0px;
 }
 
 .section-infos h2 {
     font-size: 32px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    margin-top: 5px;
     color: var( --noir-texte);
 }
 
@@ -291,7 +292,7 @@ header a {
     width: 397px;
     height: 38px;
     font-size: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     color: var( --noir-texte);
     margin-left: auto;
     margin-right: auto;
@@ -365,6 +366,9 @@ header a {
 #section-echanges {
     display: flex;
     flex-direction: column;
+    margin-top: 85px;
+    margin-bottom: 40px;
+    background-color: var(--fond-secondaire);
 }
 
 
@@ -384,8 +388,8 @@ header a {
 }
 
 .champ-recherche {
-    height: 50px;
-    width: 270px;
+    height: 49px;
+    width: 295px;
     padding-left: 40px;
     border: 1px solid #F0F0F0;
     border-radius: 6px;
@@ -435,7 +439,7 @@ header a {
 .vendeur {
     color: var( --gris-texte);
     font-weight: 400;
-    font-size: 13px;
+    font-size: 10px;
     margin: 30px 15px 10px;
     font-style: italic; 
 }
@@ -448,6 +452,7 @@ header a {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    background-color: var(--fond-principal);
 }
 
 .fil-ariane {
@@ -459,9 +464,9 @@ header a {
 
 .contenu-detail {
     display: flex;
-    padding: 40px 150px;
     gap: 60px;
     width: 100%;
+    background-color: var(--fond-secondaire);
 }
 
 #image-livre {
@@ -488,7 +493,9 @@ header a {
     color: var( --gris-texte);
     margin: 32px 0 0 0;
 }
-
+ .description {
+    margin-right: 140px;
+ }
 .infos-livre h4 {
     text-transform: uppercase;
     font-weight: 600;
@@ -502,15 +509,21 @@ header a {
     display: flex;
     align-items: center;
     margin-top: 10px;
+    height: 60px;
+    width: 190px;
+    border-radius: 114px;
+    background: var(--Fond-blanc);
+    
 }
 
 .proprietaire img,
 .photo-profil {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 90%;
     object-fit: cover;
     margin-right: 7px;
+    margin-left: 10px;
 }
 
 .proprietaire a {
@@ -520,7 +533,7 @@ header a {
 }
 
 .infos-livre .bouton {
-    width: 102%;
+    width: 80%;
     margin: 80px 0;
     display: inline-block;
     padding: 22px 38px;
@@ -582,6 +595,8 @@ header a {
 .connexion-formulaire a {
     color: black;
     text-decoration: underline;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .img-connexion {
@@ -657,6 +672,11 @@ header a {
     object-fit: cover;
 }
 
+.formulaire-connexion.inscription p {
+    color: var(--noir-texte);
+    font-size: 14px;
+    font-weight: 400;
+}
 /*****************************Partie mon compte*************************************/
 
 .section-mon-compte {
@@ -692,7 +712,6 @@ header a {
     background-color: white;
     border-radius: 12px;
     padding: 30px 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -704,6 +723,7 @@ header a {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .custom-file-upload {
@@ -735,6 +755,11 @@ header a {
     color: var(--gris-texte);
 }
 
+.titre-bibliotheque{
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--noir-texte);
+}
 .infos-bibliotheque{
     display: flex;
     align-items: center;
@@ -754,15 +779,15 @@ header a {
 }
 
 .nb-livres {
-    font-weight: 600;
+    font-weight: 400;
     color: #292929;
-    font-size: 8px;
+    font-size: 14px;
 }
 
 .icon-biblio {
     width: 11px;
     height: 14px;
-    margin-right: 5px;
+
 }
 
 /* Colonne droite formulaire */
@@ -772,7 +797,6 @@ header a {
     background: white;
     border-radius: 20px;
     padding: 40px 50px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.05);
 }
 
 .titre-infos {
@@ -817,7 +841,7 @@ header a {
     height: 50px;
     border: 1px solid white;
     border-radius: 6px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     padding-left: 15px;
 }
 
@@ -833,10 +857,10 @@ input:autofill {
 .section-voslivres {
     background: var(--Fond-blanc);
     margin-top: 35px;
-    border-radius: 20px;
-    padding: 35px 50px;
+    border-radius: 20px 20px 20px 20px;
     border-collapse: collapse;
     width: 100%;
+    margin-bottom: 80px;
 }
 
 .section-voslivres .titre-infos {
@@ -1197,6 +1221,29 @@ input:autofill {
 }
 
 
+/* Pastille de notification des messages */
+.message-link {
+    position: relative;
+    display: inline-block;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #000000;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
 /* ========= PAGE ÉDITION D'UN LIVRE ========= */
 
 #edition-livre{
@@ -1230,7 +1277,7 @@ input:autofill {
 #titre-edition-livre{ 
     font-size:26px; 
     font-weight:400; 
-    margin:8px 0 0; 
+    margin:15px 0 0; 
 }
 
 /* Bloc principal */
@@ -1355,8 +1402,8 @@ input:autofill {
 
 /* Colonne gauche (identité) */
 #profil-public .bloc-gauche{
-    width: 341px; 
-    height: 579px;
+    width: 381px; 
+    height: 520px;
     background:#fff; 
     border-radius:20px; 
     text-align:center;
@@ -1441,15 +1488,16 @@ input:autofill {
     color:var(--noir-texte); 
     text-transform:uppercase; 
     letter-spacing:.4px;
-    padding:8px 10px; text-align:left;
+    padding:30px 10px 7px 10px; 
+    text-align:left;
     text-align: center;
 }
 
 #profil-public .tableau-livres tbody tr td{
     background:var(--fond-formulaire); 
-    padding:12px 10px; 
+    margin: auto;
+    padding:12px 10px 12px 15px; 
     vertical-align:center;
-    text-align: center;
 }
 
 
@@ -1490,3 +1538,32 @@ input:autofill {
   background-color: var(--fond-formulaire); 
 }
 
+/* ------------- PAGE ERROR 404 --------------- */
+
+.error-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-container h1{
+    color: #00AC66;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    font-size: 60px;
+}
+
+
+/**************** Forcer les input connexion et inscription a être en blanc******/
+.force-blanc,
+.force-blanc:-webkit-autofill,
+.force-blanc:-webkit-autofill:hover,
+.force-blanc:-webkit-autofill:focus,
+.force-blanc:-moz-autofill {
+    background-color: #fff !important;
+    -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+            box-shadow: 0 0 0 1000px #fff inset !important;
+    -webkit-text-fill-color: inherit !important;
+  border: 1px solid #f0f0f0 !important; 
+    border-radius: 6px;
+}

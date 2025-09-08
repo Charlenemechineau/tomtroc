@@ -158,4 +158,48 @@ class MessageManager extends AbstractEntityManager
         return $this->db->lastInsertId();
     }
 
+
+
+    /**
+     * Compte le nombre de messages non lus pour un utilisateur
+     * @param int $userId L'ID de l'utilisateur connecté
+     * @return int Le nombre de messages non lus
+     */
+    public function getUnreadMessagesCount(int $userId): int
+    {
+        $sql = "
+            SELECT COUNT(*) as nb_messages_non_lus
+            FROM messages m
+            JOIN conversations c ON m.conversation_id = c.id
+            WHERE (c.user1_id = :userId OR c.user2_id = :userId)
+            AND m.sender_id != :userId
+            AND m.is_read = 0
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['nb_messages_non_lus'];
+    }
+
+    /**
+     * Marque tous les messages d'une conversation comme lus pour un utilisateur
+     * @param int $conversationId L'ID de la conversation
+     * @param int $userId L'ID de l'utilisateur qui lit les messages
+     */
+    public function markMessagesAsRead(int $conversationId, int $userId): void
+    {
+        $sql = "
+            UPDATE messages 
+            SET is_read = 1 
+            WHERE conversation_id = :conversationId 
+            AND sender_id != :userId
+            AND is_read = 0
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':conversationId', $conversationId, PDO::PARAM_INT);
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }

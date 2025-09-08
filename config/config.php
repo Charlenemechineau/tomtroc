@@ -1,6 +1,6 @@
 <?php
-require_once 'autoload.php'; // Charger les classes
-session_start();             // Ensuite, démarrer la session
+require_once 'autoload.php'; // Charge les classes
+session_start();             // Ensuite, démarre la session
 
 define('TEMPLATE_VIEW_PATH', './views/templates/');
 define('MAIN_VIEW_PATH', TEMPLATE_VIEW_PATH.'base.php');

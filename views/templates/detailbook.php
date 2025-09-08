@@ -20,7 +20,7 @@
             <h4>Description</h4>
             <p class="description"><?= nl2br(htmlspecialchars($book->getDescription())) ?></p>
 
-            <!--Propriétaire du livre-->
+            <!--Propriétaire du livre page de profil-->
             <h4>Propriétaire</h4>
             <div class="proprietaire">
                 <img src="images/pictures/<?= htmlspecialchars($user->getPictureUser()) ?>" alt="Photo de profil de <?= htmlspecialchars($user->getPseudo()) ?>" class="photo-profil">
@@ -30,8 +30,16 @@
                     </a>
                 </p>
             </div>
-
-            <a href="#" class="bouton">Envoyer un message</a>
+            <!-- ecrire directement au propriétaire du livre-->
+            <?php if (isset($_SESSION['user'])): ?>
+                <a href="index.php?action=messagerie&user=<?= (int)$user->getId() ?>" class="bouton">
+                    Envoyer un message
+                </a>
+            <?php else: ?>
+                <a href="index.php?action=loginUser" class="bouton">
+                    Envoyer un message
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 </section>

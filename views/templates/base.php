@@ -27,7 +27,12 @@
                 </nav>
                 <nav class="utilisateur-nav">
                     <ul>
-                        <li><a href="index.php?action=messagerie"><i class="fa-regular fa-message"></i> Messagerie</a></li> 
+                        <li><a href="index.php?action=messagerie" class="message-link"><i class="fa-regular fa-message"></i> Messagerie
+                            <?php if (isset($_SESSION['user']) && isset($unreadMessagesCount) && $unreadMessagesCount > 0): ?>
+                                <span class="notification-badge"><?= $unreadMessagesCount ?></span>
+                            <?php endif; ?></a>
+                        </li> 
+
                         <li><a href="index.php?action=myAccount"><i class="fa-regular fa-user"></i> Mon compte</a></li>   
                         
                         <?php if (!isset($_SESSION['user'])): ?>

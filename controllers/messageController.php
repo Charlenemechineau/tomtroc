@@ -30,7 +30,11 @@ class MessageController
             // Récupère les messages échangés entre l'utilisateur connecté et l'autre utilisateur//
             $messages = $messageManager->getMessagesBetweenUsers($userId, $otherUserId);
             
-        
+        // Marque les messages comme lus quand on ouvre la conversation
+        $conversation = $messageManager->getConversationByUserIds($userId, $otherUserId);
+        if ($conversation) {
+            $messageManager->markMessagesAsRead($conversation['id'], $userId);
+        }
         }
 
         // Prépare et affiche la vue "messagerie" en lui passant les données//

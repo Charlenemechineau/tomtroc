@@ -1,7 +1,8 @@
 <?php
 
-session_start();
+
 require_once 'autoload.php'; 
+session_start();
 
 
 define('TEMPLATE_VIEW_PATH', './views/templates/');

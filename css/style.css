@@ -1,8 +1,8 @@
 /*css file*/
 :root {
-    --vert-principal: #00AC66;
+    --vert-principal: #00804C;
     --vert-foncé: #006D41;
-    --gris-texte: #A6A6A6;
+    --gris-texte: #6E6E6E;
     --noir-texte: #292929;
     --fond-principal: #f5f3ef;
     --fond-secondaire: #faf9f7;
@@ -857,10 +857,11 @@ input:autofill {
 .section-voslivres {
     background: var(--Fond-blanc);
     margin-top: 35px;
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 20px;
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 80px;
+    overflow: hidden;                 
 }
 
 .section-voslivres .titre-infos {
@@ -880,13 +881,13 @@ input:autofill {
     color: var(--noir-texte);
     font-weight: 600;
     font-size: 13px;
-    padding: 15px 10px;
+    padding: 15px 40px;
     text-align: left;
     border-bottom: solid 0.5px var(--fond-principal);
 }
 
 .tableau-livres td {
-    padding: 15px 10px;
+    padding: 15px 20px 15px 40px;
     border-bottom: 1px solid #f0f0f0;
     vertical-align: middle;
     font-size: 12px;
@@ -898,12 +899,11 @@ input:autofill {
     width: 50px;
     height: 70px;
     object-fit: cover;
-    border-radius: 5px;
 }
 
 /* Colonne Description en italique (4e colonne) */
 .tableau-livres tbody td:nth-child(4) {
-  font-style: italic;
+    font-style: italic;
 }
 
 /* Statuts disponibilité */
@@ -1225,6 +1225,7 @@ input:autofill {
 .message-link {
     position: relative;
     display: inline-block;
+    padding-right: 8px;
 }
 
 .notification-badge {
@@ -1325,14 +1326,20 @@ input:autofill {
     text-decoration:underline;
     cursor:pointer;
 }
-.bouton-fichier:hover{ color:#666; }
-#book_picture{ display:none; }
 
+.bouton-fichier:hover{
+    color:#666;
+}
+
+#book_picture{
+    display:none;
+}
 
 .formulaire-edition{
     width: 80%;
     margin-left: 100px;
 }
+
 /* Colonne droite : formulaire */
 .formulaire-edition label{
     font-size:14px;
@@ -1476,6 +1483,7 @@ input:autofill {
     border-radius: 20px;
     border-collapse: collapse;
     width: 100%; 
+    overflow: hidden;
 }
 
 #profil-public .tableau-livres{
@@ -1488,15 +1496,16 @@ input:autofill {
     color:var(--noir-texte); 
     text-transform:uppercase; 
     letter-spacing:.4px;
-    padding:30px 10px 7px 10px; 
+    padding:30px 0px 15px 0px; 
     text-align:left;
     text-align: center;
 }
 
+
 #profil-public .tableau-livres tbody tr td{
     background:var(--fond-formulaire); 
     margin: auto;
-    padding:12px 10px 12px 15px; 
+    padding:20px 20px 20px 40px; 
     vertical-align:center;
 }
 
@@ -1509,7 +1518,6 @@ input:autofill {
     width:64px; 
     height:84px; 
     object-fit:cover; 
-    border-radius:6px;
     background:#eee;
 }
 
@@ -1554,7 +1562,7 @@ input:autofill {
 }
 
 
-/**************** Forcer les input connexion et inscription a être en blanc******/
+/**************** Forcer les input connexion et inscription à être en blanc******/
 .force-blanc,
 .force-blanc:-webkit-autofill,
 .force-blanc:-webkit-autofill:hover,

@@ -20,20 +20,21 @@
                     <a href="index.php?action=home"><img src="./images/logo.png"  alt=""></a>
                 </div>
             <div class="nav-sections">    
-                <nav class="main-nav">
-                    <ul class="main-menu">
-                        <a href="index.php?action=home"><li>Accueil</li></a> <!--Lien vers la page d'acceuil-->
-                        <a href="index.php?action=books"><li>Nos livres à l'échange</li></a> <!-- lien vers la page nos livre à l'échange-->
+                <nav class="main-nav" aria-label="Navigation principale">
+                    <ul class="main-menu" role="list">
+                        <li><a href="index.php?action=home">Accueil</a></li>
+                        <li><a href="index.php?action=books">Nos livres à l'échange</a></li>
+                    </ul>
                 </nav>
                 <nav class="utilisateur-nav">
                     <ul>
                         <li><a href="index.php?action=messagerie" class="message-link"><i class="fa-regular fa-message"></i> Messagerie
                             <?php if (isset($_SESSION['user']) && isset($unreadMessagesCount) && $unreadMessagesCount > 0): ?>
                                 <span class="notification-badge"><?= $unreadMessagesCount ?></span>
-                            <?php endif; ?></a>
+                            <?php endif; ?></a><!--lien vers la page de messagerie -->
                         </li> 
 
-                        <li><a href="index.php?action=myAccount"><i class="fa-regular fa-user"></i> Mon compte</a></li>   
+                        <li><a href="index.php?action=myAccount"><i class="fa-regular fa-user"></i> Mon compte</a></li><!-- lien vers la page mon compte-->   
                         
                         <?php if (!isset($_SESSION['user'])): ?>
                             <li><a href="index.php?action=loginUser">Connexion</a></li> <!-- lien pour la connexion au compte Utilisateur-->

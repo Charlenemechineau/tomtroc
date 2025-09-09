@@ -1,5 +1,3 @@
-# Fichier de configuration de la base de données
+# Secrets locaux
 config/config.php
-
-# Cache éventuel
-cache/
+.env

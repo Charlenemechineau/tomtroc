@@ -71,37 +71,37 @@ class BookController
 
     public function rechercherLivres()
 {
-    // On crée une instance de BookManager pour accéder aux méthodes de gestion des livres
+    // On crée une instance de BookManager pour accéder aux méthodes de gestion des livres/
     $bookManager = new BookManager();
 
-    // On récupère le mot-clé saisi par l'utilisateur dans le champ "recherche" (ou une chaîne vide par défaut)
+    // On récupère le mot-clé saisi par l'utilisateur dans le champ "recherche" (ou une chaîne vide par défaut)//
     $recherche = Utils::request('recherche', '');
 
-    // On exécute la recherche en BDD avec le mot-clé
+    // On exécute la recherche en BDD avec le mot-clé//
     $books = $bookManager->findBooksByTitle($recherche);
 
-    // Si on a trouvé exactement 1 livre...
+    // Si on a trouvé exactement 1 livre...//
     if (count($books) === 1) {
-        // On récupère ce livre
+        // On récupère ce livre//
         $book = $books[0];
 
-        // On crée une instance de UserManager pour aller chercher l'utilisateur qui a publié ce livre
+        // On crée une instance de UserManager pour aller chercher l'utilisateur qui a publié ce livre//
         $userManager = new UserManager();
 
-        // On récupère l'utilisateur propriétaire du livre via son ID (stocké dans l'objet $book)
+        // On récupère l'utilisateur propriétaire du livre via son ID (stocké dans l'objet $book)//
         $user = $userManager->getUserById($book->getUserId());
 
-        // On prépare la vue "detailbook" pour afficher la fiche du livre
+        // On prépare la vue "detailbook" pour afficher la fiche du livre//
         $view = new View("Détail du livre");
 
-        // On affiche la vue en lui passant les données du livre et de son utilisateur
+        // On affiche la vue en lui passant les données du livre et de son utilisateur//
         $view->render("detailbook", [
             "book" => $book,
             "user" => $user
         ]);
     } else {
-        // Sinon (zéro ou plusieurs livres trouvés),
-        // on affiche simplement la vue "books" avec les résultats
+        // Sinon (zéro ou plusieurs livres trouvés),//
+        // on affiche simplement la vue "books" avec les résultats//
 
         $view = new View("Résultat de recherche");
 

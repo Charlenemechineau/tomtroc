@@ -1,4 +1,5 @@
 <!-- TEMPLATE : page édition d'un livre -->
+
 <section id="edition-livre">
 
   <div class="entete-edition">

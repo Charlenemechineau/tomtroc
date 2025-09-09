@@ -16,6 +16,7 @@
             <h1><?= htmlspecialchars($book->getTitle()) ?></h1>
             <p class="auteur">par <?= htmlspecialchars($book->getAuthor()) ?></p>
             <p class="separateur">______</p>
+
             <!-- Description du livre-->
             <h4>Description</h4>
             <p class="description"><?= nl2br(htmlspecialchars($book->getDescription())) ?></p>
@@ -30,7 +31,8 @@
                     </a>
                 </p>
             </div>
-            <!-- ecrire directement au propriétaire du livre-->
+
+            <!-- écrire directement au propriétaire du livre-->
             <?php if (isset($_SESSION['user'])): ?>
                 <a href="index.php?action=messagerie&user=<?= (int)$user->getId() ?>" class="bouton">
                     Envoyer un message

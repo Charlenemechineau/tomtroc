@@ -16,12 +16,12 @@ Veuillez suivre ces étapes :
 
 6.Dans ce fichier, indiquez les informations permettant d'accéder à votre base de données. Voici un exemple que vous pouvez copier/coller afin d'accélerer le processus: 
 
-            SetEnv DB_HOST localhost
-            SetEnv DB_NAME tom_troc  
-            SetEnv DB_USER root (remplacez "root" par votre nom d'utilisateur permettant la connexion à phpMyAdmin)
-            SetEnv DB_PASS "" (remplacez "" par votre mot de passe)
-
+                define('DB_HOST', 'localhost');
+                define('DB_NAME', 'tomtroc');
+                define('DB_USER', 'root');(remplacez "root" par votre nom d'utilisateur permettant la connexion à phpMyAdmin)
+                define('DB_PASS', '');(remplacez "" par votre mot de passe)
+                        
 
 7. Renommer ensuite le fichier _config.php en config.php
-8. 
-9. Lancez le projet à l'aide de XAMP ou WAMP selon vos préférences !
+   
+8. Lancez le projet à l'aide de XAMP ou WAMP selon vos préférences !

@@ -156,76 +156,91 @@ class UserController
     }
 
     /**
- * Met à jour la photo de profil de l’utilisateur connecté.
- *
- * Étapes :
- * 1) Vérifier que l’utilisateur est connecté et que le formulaire a bien été envoyé en POST.
- * 2) Récupérer le fichier envoyé via l’input "profile_picture".
- * 3) Générer un nom de fichier unique et définir le dossier de destination.
- * 4) Déplacer le fichier sur le serveur puis enregistrer le nouveau nom en base.
- * 5) Mettre à jour la session et rediriger vers la page "Mon compte".
- */
-public function updateProfilePicture(): void
-{
-    // 1) Sécurité : on s’assure que l’utilisateur est connecté et que la requête est bien un POST
-    if (!isset($_SESSION['user'])) { Utils::redirect('loginUser'); return; }
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') { Utils::redirect('myAccount'); return; }
+     * Met à jour la photo de profil de l’utilisateur connecté.
+     *
+     * Étapes :
+     * 1) Vérifier que l’utilisateur est connecté et que le formulaire a bien été envoyé en POST.
+     * 2) Récupérer le fichier envoyé via l’input "profile_picture".
+     * 3) Générer un nom de fichier unique et définir le dossier de destination.
+     * 4) Déplacer le fichier sur le serveur puis enregistrer le nouveau nom en base.
+     * 5) Mettre à jour la session et rediriger vers la page "Mon compte".
+     */
+    public function updateProfilePicture(): void
+    {
+        // 1) Sécurité : on s’assure que l’utilisateur est connecté et que la requête est bien un POST
+        if (!isset($_SESSION['user'])) { Utils::redirect('loginUser'); return; }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') { Utils::redirect('myAccount'); return; }
 
-    // 2) On vérifie qu’un fichier a bien été envoyé et sans erreur
-    if (empty($_FILES['profile_picture']) || $_FILES['profile_picture']['error'] !== UPLOAD_ERR_OK) {
+        // 2) On vérifie qu’un fichier a bien été envoyé et sans erreur
+        if (empty($_FILES['profile_picture']) || $_FILES['profile_picture']['error'] !== UPLOAD_ERR_OK) {
+            Utils::redirect('myAccount');
+            return;
+        }
+
+        $user   = $_SESSION['user'];
+        $userId = (int)$user->getId();
+        $file   = $_FILES['profile_picture'];
+
+        // 3) On fabrique un nom unique et on définit le dossier où enregistrer l’image
+        $fileName   = uniqid('user_' . $userId . '_') . '_' . basename($file['name']);
+        $targetDir  = 'images/pictures/';   // même dossier que celui utilisé dans l’attribut src de <img>
+        $targetPath = $targetDir . $fileName;
+
+        // 4) On déplace le fichier et, si tout va bien, on met à jour la BDD puis la session
+        if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+            (new UserManager())->updateProfilePicture($userId, $fileName);
+            $user->setPictureUser($fileName);    // met à jour l’objet en session pour afficher la nouvelle photo immédiatement
+            $_SESSION['user'] = $user;
+        }
+
+        // 5) On retourne sur la page “Mon compte”
         Utils::redirect('myAccount');
-        return;
     }
-
-    $user   = $_SESSION['user'];
-    $userId = (int)$user->getId();
-    $file   = $_FILES['profile_picture'];
-
-    // 3) On fabrique un nom unique et on définit le dossier où enregistrer l’image
-    $fileName   = uniqid('user_' . $userId . '_') . '_' . basename($file['name']);
-    $targetDir  = 'images/pictures/';   // même dossier que celui utilisé dans l’attribut src de <img>
-    $targetPath = $targetDir . $fileName;
-
-    // 4) On déplace le fichier et, si tout va bien, on met à jour la BDD puis la session
-    if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-        (new UserManager())->updateProfilePicture($userId, $fileName);
-        $user->setPictureUser($fileName);    // met à jour l’objet en session pour afficher la nouvelle photo immédiatement
-        $_SESSION['user'] = $user;
-    }
-
-    // 5) On retourne sur la page “Mon compte”
-    Utils::redirect('myAccount');
-}
 
 
  //****************************Partie template profil utilisateurs******************/
  
- public function showPublicProfile(): void
+public function showPublicProfile(): void
 {
+    // 1) Récupérer l'id envoyé dans l'URL (ex: ?id=12)//
+    //    (int) force un nombre entier ; si rien n'est passé, on met 0.//
     $userId = (int)($_GET['id'] ?? 0);
+
+    // Si l'id est invalide (0 ou négatif), on renvoie vers l'accueil.//
     if ($userId <= 0) { Utils::redirect('home'); return; }
 
+    // 2) On prépare nos "managers" pour parler à la base de données//
     $userManager = new UserManager();
     $bookManager = new BookManager();
 
+    // 3) Charger l'utilisateur demandé//
     $user  = $userManager->getUserById($userId);
+
+    // Si l'utilisateur n'existe pas, on renvoie vers l'accueil//
     if (!$user) { Utils::redirect('home'); return; }
 
+    // 4) Charger la liste des livres de cet utilisateur//
     $books = $bookManager->getBooksByUserId($userId);
-    $bookCount = count($books);
+    $bookCount = count($books); // pratique pour l'affichage//
 
-
+    // 5) Calculer "Membre depuis ..." (années / mois / jours)//
+    //    On sécurise : si la date existe, on calcule la différence avec aujourd'hui.//
     $membreDepuis = '';
     if (method_exists($user, 'getCreatedAt') && $user->getCreatedAt()) {
         try {
             $d1 = new DateTime($user->getCreatedAt());
             $diff = $d1->diff(new DateTime());
+
+            // Priorité aux années, sinon mois, sinon jours//
             if ($diff->y >= 1)   $membreDepuis = $diff->y.' an'.($diff->y>1?'s':'');
             elseif ($diff->m>=1) $membreDepuis = $diff->m.' mois';
             else                  $membreDepuis = $diff->d.' jour'.($diff->d>1?'s':'');
-        } catch (Throwable $e) {}
+        } catch (Throwable $e) {
+            // En cas d'erreur de date, on laisse $membreDepuis vide (pas de crash)//
+        }
     }
 
+    // 6) Afficher la vue "publicProfil" avec toutes les données dont la vue a besoin//
     $view = new View("Profil public");
     $view->render("publicProfil", [
         'user'         => $user,
@@ -234,4 +249,5 @@ public function updateProfilePicture(): void
         'membreDepuis' => $membreDepuis,
     ]);
 }
+
 }

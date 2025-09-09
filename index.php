@@ -32,7 +32,6 @@ try {
             $bookController->rechercherLivres();
             break;
 
-        // --- Authentification / Compte ---//
 
         case 'loginUser':
             // Affiche le formulaire de connexion//
@@ -81,7 +80,6 @@ try {
             $userController = new UserController();
             $userController->updateProfilePicture();
             break;
-        // --- Messagerie ---
 
         case 'messagerie':
             // Affiche la messagerie : liste de conversations + fil.
@@ -96,7 +94,6 @@ try {
             $messagerieController->sendMessage();
             break;
 
-        // --- Édition des livres ---
 
         case 'editBook':
             // Affiche le formulaire d’édition d’un livre //
@@ -131,8 +128,11 @@ try {
             break;
 
         default:
-            throw new Exception("L'action demandée n'est pas prise en charge.");
-    }
+            // affichage de ma route si erreur page 404 //
+            (new ErrorController())->notFound("Cette page n'existe pas.");
+            break;
+        }
+
 } catch (Exception $e) {
     $errorView = new View('Erreur');
     $errorView->render('errorPage', ['errorMessage' => $e->getMessage()]);

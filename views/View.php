@@ -13,7 +13,7 @@ class View
     {
         $viewPath = $this->buildViewPath($viewName);
 
-        // Ajoute automatiquement le compteur de messages non lus
+        // Ajoute automatiquement le compteur de messages non lus//
         $unreadMessagesCount = 0;
         if (isset($_SESSION['user'])) {
             $messageManager = new MessageManager();

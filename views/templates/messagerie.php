@@ -34,7 +34,7 @@
         <!-- En-tête de la conversation -->
         <div class="entete-conversation">
           <?php 
-          // Trouve les infos de l'interlocuteur
+          // Trouve les infos de l'interlocuteur//
           $interlocuteur = null;
           foreach ($conversations as $conv) {
             if ($conv['participant_id'] == $otherUserId) {

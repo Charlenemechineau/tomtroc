@@ -11,10 +11,11 @@
 
         <form method="post" action="index.php?action=processLogin">
             <label for="email">Adresse e-mail</label>
-            <input class="force-blanc" type="email" name="email" id="email" required>
+            <input class="force-blanc" type="email" name="email" id="email" required> <!--Permet de rendre obligatoire le champs e-mail-->
+            
 
             <label for="password">Mot de passe</label>
-            <input class="force-blanc" type="password" name="password" id="password" required>
+            <input class="force-blanc" type="password" name="password" id="password" required> <!--Permet de rendre obligatoire le champ mot de passe-->
 
             <button type="submit" class="bouton">Se connecter</button>
         </form>
